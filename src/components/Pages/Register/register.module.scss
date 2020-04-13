@@ -1,0 +1,67 @@
+.Register {
+  position: relative;
+  height: 70vh;
+
+  .registeBox {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    .welcomText {
+      h3 {
+        font-weight: 700;
+        font-size: 35px;
+        span {
+          font-weight: 600;
+          font-size: 16px;
+          color: #ff3115;
+        }
+      }
+    }
+
+    .registerForm {
+      label {
+        margin-bottom: 0.1rem;
+      }
+      .inputs {
+        margin-bottom: 12px;
+        &:hover {
+          color: #ff3115;
+          border: 1px solid #ff3115;
+        }
+        &:focus {
+          border: 1px solid #ff3115;
+          outline: none;
+          box-shadow: none;
+        }
+      }
+
+      .subBtn {
+        background-color: #ff3115;
+        color: #ffff;
+        width: 100%;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        &:hover {
+          background-color: #ffff;
+          color: #ff3115;
+          border: 1px solid #ff3115;
+        }
+
+        &:focus {
+          border: 1px solid #ff3115;
+        }
+      }
+    }
+    .bottomText {
+      p {
+        margin: 0;
+        color: #cdcdcd;
+        a {
+          color: #ff3115;
+        }
+      }
+    }
+  }
+}

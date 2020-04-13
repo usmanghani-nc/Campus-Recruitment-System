@@ -1,0 +1,97 @@
+.Header {
+  background-color: #ffff;
+
+  //   TOOLBAR.. //
+  .Toolbar {
+    padding: 4px 0 5px;
+    background-color: #111111;
+    color: #ffff;
+    height: 30px;
+
+    .toolbarContainer {
+      height: 100%;
+      .toolbarRow {
+        height: 100%;
+        .toolbarCol {
+          height: 100%;
+        }
+      }
+    }
+
+    // left
+    .toolbarCol {
+      .toolbarLeft {
+        .welcomeMessage {
+          font-size: 14px;
+          svg {
+            color: #ff3115;
+            margin-right: 8px;
+          }
+          span {
+            color: #ffffff;
+          }
+        }
+      }
+    }
+
+    // right
+    .toolbarRight {
+      height: 100%;
+      .toolbarShareIcon {
+        height: 100%;
+        ul {
+          height: 100%;
+          margin-bottom: 0;
+          display: flex;
+          justify-content: flex-end;
+          li {
+            list-style: none;
+            margin-left: 8px;
+            a {
+              height: 100%;
+              padding: 0;
+              transition: all 0.3s ease 0s;
+              text-decoration: none;
+              font-size: 14px;
+              color: #888888;
+              &:hover {
+                color: #ffffff;
+              }
+
+              svg {
+                height: 100%;
+                font: normal normal normal 14px/1 FontAwesome;
+                font-size: inherit;
+                text-rendering: auto;
+                -webkit-font-smoothing: antialiased;
+              }
+            }
+
+            .applyBtn {
+              color: #ff3115;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  // HEADER START.. //
+  .HeaderStart {
+    nav {
+      a {
+        color: #505050 !important;
+        font-weight: 400;
+        font-size: 16px;
+        transition: all 0.3s ease 0s;
+        padding-right: 0.5rem;
+        padding-left: 0.5rem;
+        text-decoration: none;
+
+        &:hover {
+          color: #ff3115 !important;
+        }
+      }
+    }
+  }
+}
