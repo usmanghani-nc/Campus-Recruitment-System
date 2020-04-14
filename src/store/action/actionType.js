@@ -1,0 +1,3 @@
+export const LOGIN = 'LOGIN';
+export const REGISTER_STUDENT = 'REGISTER_STUDENT';
+export const REGISTER_COMPANY = 'REGISTER_COMPANY';
