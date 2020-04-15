@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // IMPORTS..
 import { Input, Button, Select, DatePicker } from 'antd';
 import moment from 'moment';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { register_company, register_student, current_user } from '../../../store/action/index';
+import { auth } from '../../../firebase/config';
 
 // SCSS..
 import classes from './register.module.scss';
@@ -29,6 +32,27 @@ const Register = () => {
   const [companyEmail, setCompanyEmail] = useState('');
   const [companyPassword, setcompanyPassword] = useState('');
   const [companyConfirmPassword, setCompanyConfirmPassword] = useState('');
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  useSelector((state) => {
+    if (state && state.authReducer.currnetuser) {
+      console.log('user found');
+    } else {
+      console.log('not found');
+    }
+  });
+
+  useEffect(() => {
+    auth.onAuthStateChanged((curUser) => {
+      if (curUser) {
+        dispatch(current_user(curUser));
+      } else {
+        console.log('no user');
+      }
+    });
+  }, [dispatch]);
 
   const { Option } = Select;
 
@@ -61,11 +85,21 @@ const Register = () => {
     };
 
     if (accounType === 'student') {
+      if (student.password !== student.confirmPassword) alert('Password not match');
+
+      dispatch(register_student(email, password, student));
+
       console.log('Student From Submitted', student);
     } else {
+      if (company.password !== company.companyConfirmPassword) alert('Password not match');
+
+      dispatch(register_company(email, password, company));
+
       console.log('Company Form Submitted', company);
     }
   };
+
+  // useSelector((state) => {});
 
   return (
     <div className={classes.Register}>
