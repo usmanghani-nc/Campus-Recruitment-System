@@ -1,18 +1,25 @@
 import React, { useState } from 'react';
 
 // IMPORTS...
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { Container, Row, Col } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faUniversity } from '@fortawesome/free-solid-svg-icons';
-import { useSelector } from 'react-redux';
-import { auth } from '../../../../firebase/config';
+import { useSelector, useDispatch } from 'react-redux';
+import { singout } from '../../../../store/action/index';
 
 // SCSS...
 import classes from '../header.module.scss';
 
 const Toolbar = () => {
   const user = useSelector((state) => state.authReducer.currnetuser);
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const signOut = () => {
+    history.push('/login');
+    return dispatch(singout());
+  };
 
   return (
     <div className={classes.Toolbar}>
@@ -32,7 +39,7 @@ const Toolbar = () => {
                 <ul>
                   {user ? (
                     <li>
-                      <div onClick={() => auth.signOut()} className={classes.applyBtn}>
+                      <div onClick={signOut} className={classes.applyBtn}>
                         Logout
                       </div>
                     </li>

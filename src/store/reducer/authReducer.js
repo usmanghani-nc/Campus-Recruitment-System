@@ -12,7 +12,11 @@ const auth = (state = initialState, action) => {
         ...state,
         currnetuser: action.user
       }
-      case actionType.LOGIN:
+      case actionType.LOGIN_STUDENT:
+        return {
+          ...state,
+        };
+      case actionType.LOGIN_COMPANY:
         return {
           ...state,
         };
@@ -25,8 +29,10 @@ const auth = (state = initialState, action) => {
           ...state,
         };
       case actionType.SIGN_OUT:
+        console.log("SIGN_OUT SUCCESS");
         return {
           ...state,
+          currnetuser: false
         };
       default:
         return {

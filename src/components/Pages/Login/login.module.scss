@@ -20,6 +20,35 @@
       }
     }
 
+    .dropDown {
+      display: block;
+      margin-bottom: 12px;
+      color: rgba(0, 0, 0, 0.65);
+      font-size: 14px;
+      border: 1px solid #d9d9d9;
+      border-radius: 2px;
+      -webkit-transition: all 0.3s;
+      transition: all 0.3s;
+
+      div,
+      span {
+        border: none !important;
+        outline: none !important;
+        box-shadow: none !important;
+        &:hover {
+          border: none !important;
+          outline: none !important;
+          box-shadow: none !important;
+        }
+
+        &:focus {
+          border: none;
+          outline: none !important;
+          box-shadow: none !important;
+        }
+      }
+    }
+
     .LoginForm {
       label {
         margin-bottom: 0.1rem;
@@ -54,6 +83,7 @@
         }
       }
     }
+
     .bottomText {
       p {
         margin: 0;
