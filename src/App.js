@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 // IMPORTS...
 import Routes from './components/Routes/Routes';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { current_user } from './store/action/index';
+import { current_user, company_data } from './store/action/index';
 import { auth } from './firebase/config';
 import Loader from './components/Layout/Loader/Loader';
 
@@ -15,6 +15,12 @@ const App = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const [data, setData] = useState(false);
+
+  const company = useSelector((state) => state.companyReducer.companyData);
+
+  useEffect(() => {
+    dispatch(company_data());
+  }, [dispatch]);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((curUser) => {

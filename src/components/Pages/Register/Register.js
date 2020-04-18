@@ -102,7 +102,6 @@ const Register = () => {
             {accounType === 'student' ? (
               <Form className={classes.registerForm} onFinish={onFinish}>
                 <label htmlFor="firstName">First Name</label>
-
                 <Form.Item
                   className={classes.formItem}
                   name="firstName"
@@ -124,7 +123,6 @@ const Register = () => {
                 </Form.Item>
 
                 <label htmlFor="lastName">Last Name</label>
-
                 <Form.Item
                   className={classes.formItem}
                   name="lastName"
@@ -146,7 +144,6 @@ const Register = () => {
                 </Form.Item>
 
                 <label htmlFor="email">Email</label>
-
                 <Form.Item
                   className={classes.formItem}
                   name="email"
@@ -316,66 +313,145 @@ const Register = () => {
               </Form>
             ) : accounType === 'company' ? (
               <Form className={classes.registerForm} onFinish={onFinish}>
-                <label htmlFor="firstName">Company Name</label>
-                <Input
-                  className={classes.inputs}
+                <label htmlFor="CompanyName">Company Name</label>
+
+                <Form.Item
+                  className={classes.formItem}
                   name="CompanyName"
-                  placeholder="Company Name"
-                  type="text"
-                  onChange={(e) => setCompanyName(e.target.value)}
-                  value={companyName}
-                />
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your CompanyName!',
+                    },
+                  ]}
+                >
+                  <Input
+                    className={classes.inputs}
+                    name="CompanyName"
+                    placeholder="Company Name"
+                    type="text"
+                    onChange={(e) => setCompanyName(e.target.value)}
+                    value={companyName}
+                  />
+                </Form.Item>
+
                 <label htmlFor="companyType">Company type</label>
-                <Input
-                  className={classes.inputs}
+
+                <Form.Item
+                  className={classes.formItem}
                   name="companyType"
-                  placeholder="Company type"
-                  type="text"
-                  onChange={(e) => setCompanyType(e.target.value)}
-                  value={companyType}
-                  required
-                />
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your Company type!',
+                    },
+                  ]}
+                >
+                  <Input
+                    className={classes.inputs}
+                    name="companyType"
+                    placeholder="Company type"
+                    type="text"
+                    onChange={(e) => setCompanyType(e.target.value)}
+                    value={companyType}
+                  />
+                </Form.Item>
+
                 <label htmlFor="companyType">Company location</label>
-                <Input
-                  className={classes.inputs}
+                <Form.Item
+                  className={classes.formItem}
                   name="CompanyLocation"
-                  placeholder="Company location"
-                  type="text"
-                  onChange={(e) => setCompanyLocation(e.target.value)}
-                  value={companyLocation}
-                  required
-                />
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your Company location!',
+                    },
+                  ]}
+                >
+                  <Input
+                    className={classes.inputs}
+                    name="CompanyLocation"
+                    placeholder="Company location"
+                    type="text"
+                    onChange={(e) => setCompanyLocation(e.target.value)}
+                    value={companyLocation}
+                  />
+                </Form.Item>
+
                 <label htmlFor="Email">Email</label>
-                <Input
-                  className={classes.inputs}
+                <Form.Item
+                  className={classes.formItem}
                   name="Email"
-                  placeholder="Email"
-                  type="email"
-                  onChange={(e) => setCompanyEmail(e.target.value)}
-                  value={companyEmail}
-                  required
-                />
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your  Email!',
+                    },
+                  ]}
+                >
+                  <Input
+                    className={classes.inputs}
+                    name="Email"
+                    placeholder="Email"
+                    type="email"
+                    onChange={(e) => setCompanyEmail(e.target.value)}
+                    value={companyEmail}
+                  />
+                </Form.Item>
 
                 <label htmlFor="CompanyPassword">Password</label>
-                <Input
-                  className={classes.inputs}
+
+                <Form.Item
+                  className={classes.formItem}
                   name="CompanyPassword"
-                  placeholder="Password"
-                  type="password"
-                  onChange={(e) => setcompanyPassword(e.target.value)}
-                  value={companyPassword}
-                  required
-                />
-                <label htmlFor="setCompanyConfirmPassword">Confirm password</label>
-                <Input
-                  className={classes.inputs}
-                  name="setCompanyConfirmPassword"
-                  placeholder="Confirm password"
-                  type="password"
-                  onChange={(e) => setCompanyConfirmPassword(e.target.value)}
-                  value={companyConfirmPassword}
-                  required
-                />
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your Company Password!',
+                    },
+                  ]}
+                >
+                  <Input.Password
+                    className={classes.inputs}
+                    name="CompanyPassword"
+                    placeholder="Password"
+                    type="password"
+                    onChange={(e) => setcompanyPassword(e.target.value)}
+                    value={companyPassword}
+                  />
+                </Form.Item>
+
+                <label htmlFor="confirmPassword">Confirm password</label>
+
+                <Form.Item
+                  className={classes.formItem}
+                  dependencies={['CompanyPassword']}
+                  name="confirmPassword"
+                  rules={[
+                    {
+                      required: true,
+                      message: 'Please input your password',
+                    },
+                    ({ getFieldValue }) => ({
+                      validator(rule, value) {
+                        if (!value || getFieldValue('CompanyPassword') === value) {
+                          return Promise.resolve();
+                        }
+                        return Promise.reject('The two passwords that you entered do not match!');
+                      },
+                    }),
+                  ]}
+                >
+                  <Input.Password
+                    className={classes.inputs}
+                    name="confirmPassword"
+                    placeholder="Confirm password"
+                    type="password"
+                    onChange={(e) => setCompanyConfirmPassword(e.target.value)}
+                    value={companyConfirmPassword}
+                  />
+                </Form.Item>
+
                 <Button className={classes.subBtn} htmlType="submit">
                   Submit
                 </Button>
