@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // IMPORTS...
 import { Link, useHistory } from 'react-router-dom';
@@ -13,6 +13,7 @@ import classes from '../header.module.scss';
 
 const Toolbar = () => {
   const user = useSelector((state) => state.authReducer.currnetuser);
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -44,14 +45,18 @@ const Toolbar = () => {
                       </div>
                     </li>
                   ) : (
-                    <li>
-                      <Link to="/register" className={classes.applyBtn}>
-                        Register
-                      </Link>
-                      <Link to="/login" className={classes.applyBtn}>
-                        Login
-                      </Link>
-                    </li>
+                    <React.Fragment>
+                      <li>
+                        <Link to="/register" className={classes.applyBtn}>
+                          Register
+                        </Link>
+                      </li>
+                      <li>
+                        <Link to="/login" className={classes.applyBtn}>
+                          Login
+                        </Link>
+                      </li>
+                    </React.Fragment>
                   )}
                 </ul>
               </div>

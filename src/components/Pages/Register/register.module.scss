@@ -1,11 +1,12 @@
 .Register {
   position: relative;
-  min-height: 900px;
+  min-height: 800px;
 
   .registeBox {
     position: absolute;
-    top: 50%;
+    top: 40%;
     left: 50%;
+
     transform: translate(-50%, -50%);
 
     .welcomText {
@@ -67,6 +68,11 @@
       label {
         margin-bottom: 0.1rem;
       }
+
+      .formItem {
+        margin-bottom: 10px !important;
+      }
+
       .inputs,
       .datePicker {
         margin-bottom: 12px;

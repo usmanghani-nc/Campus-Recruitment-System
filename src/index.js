@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import thunk from 'redux-thunk';
 import rootReducer from './store/reducer/index';
 
+
 // SCSS...
 import 'bootstrap/dist/css/bootstrap.css';
 import './index.scss';

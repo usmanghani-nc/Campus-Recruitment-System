@@ -1,11 +1,12 @@
 .Login {
   position: relative;
-  height: 70vh;
+  min-height: 800px;
 
   .loginBox {
     position: absolute;
-    top: 50%;
+    top: 25%;
     left: 50%;
+
     transform: translate(-50%, -50%);
 
     .welcomText {
@@ -53,8 +54,12 @@
       label {
         margin-bottom: 0.1rem;
       }
+
+      .formItem {
+        margin-bottom: 10px !important;
+      }
+
       .inputs {
-        margin-bottom: 12px;
         &:hover {
           color: #ff3115;
           border: 1px solid #ff3115;
