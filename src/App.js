@@ -30,7 +30,7 @@ const App = () => {
         setData(curUser);
 
         if (currentType && currentType.data && currentType.data.type) {
-          history.push('/adminhome');
+          history.push('/AdminIndex');
         } else {
           history.push('/');
         }

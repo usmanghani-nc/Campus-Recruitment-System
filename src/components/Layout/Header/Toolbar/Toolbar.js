@@ -41,7 +41,7 @@ const Toolbar = () => {
                 <ul>
                   {admin ? (
                     <li>
-                      <Link to="/adminhome" className={classes.applyBtn}>
+                      <Link to="/AdminIndex" className={classes.applyBtn}>
                         Admin
                       </Link>
                     </li>
