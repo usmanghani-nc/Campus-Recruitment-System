@@ -1,15 +1,42 @@
 import * as actionType from './actionType';
-import { auth, firestore } from '../../firebase/config';
+import {
+  auth,
+  firestore
+} from '../../firebase/config';
 
 export const current_user = (user) => {
   return async (dispatch) => {
-    try {
-      dispatch({
-        type: actionType.CURRENT_USER,
-        user,
-      });
-    } catch (error) {
-      console.log(error);
+    const admin = await firestore
+      .collection('Admin')
+      .doc(user.uid)
+      .get()
+      .then((doc) => doc.data());
+
+    const student = await firestore
+      .collection('students_users')
+      .doc(user.uid)
+      .get()
+      .then((doc) => doc.data());
+
+    const comapny = await firestore
+      .collection('comapny_users')
+      .doc(user.uid)
+      .get()
+      .then((doc) => doc.data());
+    if (admin || student || comapny) {
+      try {
+        dispatch({
+          type: actionType.CURRENT_USER,
+          user,
+          admin,
+          student,
+          comapny,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("no user found")
     }
   };
 };

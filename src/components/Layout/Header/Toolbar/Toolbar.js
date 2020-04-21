@@ -13,6 +13,7 @@ import classes from '../header.module.scss';
 
 const Toolbar = () => {
   const user = useSelector((state) => state.authReducer.currnetuser);
+  const admin = useSelector((state) => state.authReducer.admin);
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -38,6 +39,14 @@ const Toolbar = () => {
             <div className={classes.toolbarRight}>
               <div className={classes.toolbarShareIcon}>
                 <ul>
+                  {admin ? (
+                    <li>
+                      <Link to="/adminhome" className={classes.applyBtn}>
+                        Admin
+                      </Link>
+                    </li>
+                  ) : null}
+
                   {user ? (
                     <li>
                       <div onClick={signOut} className={classes.applyBtn}>

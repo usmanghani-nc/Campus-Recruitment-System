@@ -29,9 +29,11 @@ const App = () => {
         dispatch(current_user(curUser));
         setData(curUser);
 
-        if (currentType.data && currentType.data.type) history.push('/adminhome');
-
-        history.push('/');
+        if (currentType && currentType.data && currentType.data.type) {
+          history.push('/adminhome');
+        } else {
+          history.push('/');
+        }
       } else {
         setData(!curUser);
       }
@@ -39,7 +41,7 @@ const App = () => {
 
     // Cleanup subscription on unmount
     return () => unsubscribe();
-  }, [dispatch, currentType.data, history]);
+  }, [dispatch, currentType, history]);
 
   return <div className="App">{data ? <Routes /> : <Loader />}</div>;
 };

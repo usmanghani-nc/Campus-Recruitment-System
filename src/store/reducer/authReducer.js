@@ -2,7 +2,9 @@ import * as actionType from '../action/actionType';
 
 const initialState = {
   currnetuser: false,
-  userData: {},
+  admin: false,
+  student: false,
+  company: false,
   error: false,
 };
 
@@ -12,6 +14,9 @@ const auth = (state = initialState, action) => {
       return {
         ...state,
         currnetuser: action.user,
+        admin: action.admin,
+        student: action.student,
+        company: action.company,
       };
     case actionType.ADMIN_LOGIN:
       console.log('ADMIN_LOGIN SUCCESS');
@@ -46,6 +51,9 @@ const auth = (state = initialState, action) => {
       return {
         ...state,
         currnetuser: false,
+        admin: false,
+        student: false,
+        company: false,
       };
     default:
       return {
