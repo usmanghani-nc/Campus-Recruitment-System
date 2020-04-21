@@ -2,23 +2,54 @@ import * as actionType from './actionType';
 import { auth, firestore } from '../../firebase/config';
 
 export const current_user = (user) => {
-  return {
-    type: actionType.CURRENT_USER,
-    user,
+  return async (dispatch) => {
+    try {
+      dispatch({
+        type: actionType.CURRENT_USER,
+        user,
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+};
+
+export const admin_login = (email, password) => {
+  return async (dispatch) => {
+    try {
+      const admin = await auth.signInWithEmailAndPassword(email, password);
+      if (admin && admin.user && admin.user.uid) {
+        const userData = await firestore
+          .collection('Admin')
+          .doc(admin.user.uid)
+          .get()
+          .then((doc) => doc.data());
+        dispatch({
+          type: actionType.ADMIN_LOGIN,
+          userData,
+        });
+      }
+    } catch (error) {
+      console.log(error, 'error');
+    }
   };
 };
 
 export const login_company = (email, password, data) => {
   return async (dispatch) => {
     try {
-      const companyUser = await auth.signInWithEmailAndPassword(email, password);
+      const currUser = await auth.signInWithEmailAndPassword(email, password);
 
-      if (companyUser && companyUser.user && companyUser.user.uid) {
-        await firestore
+      if (currUser && currUser.user && currUser.user.uid) {
+        const userData = await firestore
           .collection('comapny_users')
-          .doc(companyUser.user.uid)
+          .doc(currUser.user.uid)
           .get()
           .then((doc) => doc.data());
+        dispatch({
+          type: actionType.LOGIN_COMPANY,
+          userData,
+        });
       }
     } catch (error) {
       console.log(error, 'error');
@@ -37,7 +68,11 @@ export const register_company = (email, password, data) => {
           .set({
             data,
           })
-          .then((doc) => dispatch({ type: actionType.REGISTER_COMPANY }))
+          .then((doc) =>
+            dispatch({
+              type: actionType.REGISTER_COMPANY,
+            })
+          )
           .catch((error) => {
             console.error('Error writing document: ', error);
           });
@@ -54,16 +89,15 @@ export const login_student = (email, password) => {
       const currUser = await auth.signInWithEmailAndPassword(email, password);
 
       if (currUser && currUser.user && currUser.user.uid) {
-        await firestore
+        const userData = await firestore
           .collection('students_users')
           .doc(currUser.user.uid)
           .get()
           .then((doc) => doc.data());
-
         dispatch({
           type: actionType.LOGIN_STUDENT,
+          userData,
         });
-      } else {
       }
     } catch (error) {
       console.log(error, 'error');

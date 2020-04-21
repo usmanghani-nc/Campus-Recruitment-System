@@ -1,0 +1,25 @@
+.Companys {
+  height: 100vh;
+  padding: 30px 0;
+
+  h3 {
+    color: #ff3115;
+    font-size: 30px;
+  }
+  button {
+    color: #ffff;
+    background-color: #ff3115;
+
+    &:hover {
+      border: 1px solid #ff3115;
+      color: #ff3115;
+      background-color: #ffff;
+    }
+
+    &:focus {
+      color: #ffff;
+      border-color: #ff3115;
+      background-color: #ff3115;
+    }
+  }
+}

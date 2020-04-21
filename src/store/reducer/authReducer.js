@@ -2,6 +2,7 @@ import * as actionType from '../action/actionType';
 
 const initialState = {
   currnetuser: false,
+  userData: {},
   error: false,
 };
 
@@ -12,15 +13,23 @@ const auth = (state = initialState, action) => {
         ...state,
         currnetuser: action.user,
       };
+    case actionType.ADMIN_LOGIN:
+      console.log('ADMIN_LOGIN SUCCESS');
+      return {
+        ...state,
+        userData: action.userData,
+      };
     case actionType.LOGIN_STUDENT:
       console.log('LOGIN_STUDENT SUCCESS');
       return {
         ...state,
+        userData: action.userData,
       };
     case actionType.LOGIN_COMPANY:
       console.log('LOGIN_COMPANY SUCCESS');
       return {
         ...state,
+        userData: action.userData,
       };
     case actionType.REGISTER_COMPANY:
       console.log('REGISTER_COMPANY SUCCESS');

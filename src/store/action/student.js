@@ -1,19 +1,19 @@
 import * as actionType from './actionType';
 import { firestore } from '../../firebase/config';
 
-export const company_data = (company) => {
+export const student_data = (student) => {
   return async (dispatch) => {
     await firestore
-      .collection('comapny_users')
+      .collection('students_users')
       .get()
       .then((com) => {
         com.forEach((doc) => {
           const data = {
             id: doc.id,
-            company: doc.data(),
+            student: doc.data(),
           };
           dispatch({
-            type: actionType.COMPANY_DATA,
+            type: actionType.STUDENT_DATA,
             data,
           });
         });

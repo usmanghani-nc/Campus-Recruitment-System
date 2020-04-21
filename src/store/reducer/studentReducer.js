@@ -1,15 +1,15 @@
 import * as actionType from '../action/actionType';
 
 const initialState = {
-  companyData: [],
+  studentData: [],
 };
 
-const companyReducer = (state = initialState, action) => {
+const studentReducer = (state = initialState, action) => {
   switch (action.type) {
-    case actionType.COMPANY_DATA:
+    case actionType.STUDENT_DATA:
       return {
         ...state,
-        companyData: [...state.companyData, action.data],
+        studentData: [...state.studentData, action.data],
       };
     default:
       return {
@@ -18,4 +18,4 @@ const companyReducer = (state = initialState, action) => {
   }
 };
 
-export default companyReducer;
+export default studentReducer;

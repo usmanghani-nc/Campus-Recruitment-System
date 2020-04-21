@@ -1,18 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 // IMPORTS..
-import { Link } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
-import { company_data } from '../../../store/action/index';
-
+import { useSelector } from 'react-redux';
+import CompanyView from './ComapanyView/CompanyView';
+import { Container, Row } from 'react-bootstrap';
 // SCSS..
 import classes from './company.module.scss';
 
 const Companys = () => {
   const company = useSelector((state) => state.companyReducer.companyData);
-  const dispatch = useDispatch();
 
-  return <div>Companys</div>;
+  return (
+    <div className={classes.Companys}>
+      <Container>
+        <Row>
+          {company.map((e) => (
+            <CompanyView key={e.id} {...e.company.data} />
+          ))}
+        </Row>
+      </Container>
+    </div>
+  );
 };
 
 export default Companys;

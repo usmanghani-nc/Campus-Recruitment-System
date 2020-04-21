@@ -7,3 +7,5 @@ export const LOGIN_COMPANY = 'LOGIN_COMPANY';
 export const LOGIN_STUDENT = 'LOGIN_STUDENT';
 export const COMPANY_DATA = 'COMPANY_DATA';
 export const STUDENT_DATA = 'STUDENT_DATA';
+export const ADMIN_LOGIN = 'ADMIN_LOGIN';
+export const ADMIN_LOGOUT = 'ADMIN_LOGOUT';

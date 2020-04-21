@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Routes from './components/Routes/Routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { current_user, company_data } from './store/action/index';
+import { current_user, company_data, student_data } from './store/action/index';
 import { auth } from './firebase/config';
 import Loader from './components/Layout/Loader/Loader';
 
@@ -16,10 +16,11 @@ const App = () => {
   const dispatch = useDispatch();
   const [data, setData] = useState(false);
 
-  const company = useSelector((state) => state.companyReducer.companyData);
+  const currentType = useSelector((state) => state.authReducer.userData);
 
   useEffect(() => {
     dispatch(company_data());
+    dispatch(student_data());
   }, [dispatch]);
 
   useEffect(() => {
@@ -27,6 +28,9 @@ const App = () => {
       if (curUser) {
         dispatch(current_user(curUser));
         setData(curUser);
+
+        if (currentType.data && currentType.data.type) history.push('/adminhome');
+
         history.push('/');
       } else {
         setData(!curUser);
@@ -35,7 +39,7 @@ const App = () => {
 
     // Cleanup subscription on unmount
     return () => unsubscribe();
-  }, [dispatch, history]);
+  }, [dispatch, currentType.data, history]);
 
   return <div className="App">{data ? <Routes /> : <Loader />}</div>;
 };
