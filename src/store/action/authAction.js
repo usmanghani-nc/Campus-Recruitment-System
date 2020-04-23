@@ -1,8 +1,5 @@
 import * as actionType from './actionType';
-import {
-  auth,
-  firestore
-} from '../../firebase/config';
+import { auth, firestore } from '../../firebase/config';
 
 export const current_user = (user) => {
   return async (dispatch) => {
@@ -10,20 +7,24 @@ export const current_user = (user) => {
       .collection('Admin')
       .doc(user.uid)
       .get()
-      .then((doc) => doc.data());
+      .then((doc) => doc.data())
+      .catch((err) => console.log(err));
 
     const student = await firestore
       .collection('students_users')
       .doc(user.uid)
       .get()
-      .then((doc) => doc.data());
+      .then((doc) => doc.data())
+      .catch((err) => console.log(err));
 
     const comapny = await firestore
       .collection('comapny_users')
       .doc(user.uid)
       .get()
-      .then((doc) => doc.data());
-    if (admin || student || comapny) {
+      .then((doc) => doc.data())
+      .catch((err) => console.log(err));
+
+    if (admin !== undefined || student !== undefined || comapny !== undefined) {
       try {
         dispatch({
           type: actionType.CURRENT_USER,
@@ -36,7 +37,7 @@ export const current_user = (user) => {
         console.log(error);
       }
     } else {
-      console.log("no user found")
+      console.log('no user found');
     }
   };
 };
@@ -44,16 +45,16 @@ export const current_user = (user) => {
 export const admin_login = (email, password) => {
   return async (dispatch) => {
     try {
-      const admin = await auth.signInWithEmailAndPassword(email, password);
-      if (admin && admin.user && admin.user.uid) {
-        const userData = await firestore
+      const adminSignIn = await auth.signInWithEmailAndPassword(email, password);
+      if (adminSignIn && adminSignIn.user && adminSignIn.user.uid) {
+        const admin = await firestore
           .collection('Admin')
-          .doc(admin.user.uid)
+          .doc(adminSignIn.user.uid)
           .get()
           .then((doc) => doc.data());
         dispatch({
           type: actionType.ADMIN_LOGIN,
-          userData,
+          admin,
         });
       }
     } catch (error) {
@@ -68,14 +69,14 @@ export const login_company = (email, password, data) => {
       const currUser = await auth.signInWithEmailAndPassword(email, password);
 
       if (currUser && currUser.user && currUser.user.uid) {
-        const userData = await firestore
+        const comapny = await firestore
           .collection('comapny_users')
           .doc(currUser.user.uid)
           .get()
           .then((doc) => doc.data());
         dispatch({
           type: actionType.LOGIN_COMPANY,
-          userData,
+          comapny,
         });
       }
     } catch (error) {
@@ -116,14 +117,14 @@ export const login_student = (email, password) => {
       const currUser = await auth.signInWithEmailAndPassword(email, password);
 
       if (currUser && currUser.user && currUser.user.uid) {
-        const userData = await firestore
+        const student = await firestore
           .collection('students_users')
           .doc(currUser.user.uid)
           .get()
           .then((doc) => doc.data());
         dispatch({
           type: actionType.LOGIN_STUDENT,
-          userData,
+          student,
         });
       }
     } catch (error) {

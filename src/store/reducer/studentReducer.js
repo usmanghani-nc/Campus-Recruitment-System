@@ -11,6 +11,12 @@ const studentReducer = (state = initialState, action) => {
         ...state,
         studentData: [...state.studentData, action.data],
       };
+    case actionType.DELET_USER:
+      const newData = state.studentData.filter((data) => data.id !== action.id);
+      return {
+        ...state,
+        studentData: [...newData],
+      };
     default:
       return {
         ...state,

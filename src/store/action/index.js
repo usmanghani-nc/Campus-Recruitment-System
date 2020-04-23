@@ -11,3 +11,7 @@ export {
 export { company_data } from './company';
 
 export { student_data } from './student';
+
+export { delet_user } from './deleteUser';
+
+export { update_user } from './updateUser';

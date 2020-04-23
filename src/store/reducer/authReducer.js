@@ -16,25 +16,25 @@ const auth = (state = initialState, action) => {
         currnetuser: action.user,
         admin: action.admin,
         student: action.student,
-        company: action.company,
+        company: action.comapny,
       };
     case actionType.ADMIN_LOGIN:
       console.log('ADMIN_LOGIN SUCCESS');
       return {
         ...state,
-        userData: action.userData,
+        admin: action.admin,
       };
     case actionType.LOGIN_STUDENT:
       console.log('LOGIN_STUDENT SUCCESS');
       return {
         ...state,
-        userData: action.userData,
+        student: action.student,
       };
     case actionType.LOGIN_COMPANY:
       console.log('LOGIN_COMPANY SUCCESS');
       return {
         ...state,
-        userData: action.userData,
+        company: action.company,
       };
     case actionType.REGISTER_COMPANY:
       console.log('REGISTER_COMPANY SUCCESS');

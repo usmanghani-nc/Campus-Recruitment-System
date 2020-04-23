@@ -11,6 +11,12 @@ const companyReducer = (state = initialState, action) => {
         ...state,
         companyData: [...state.companyData, action.data],
       };
+    case actionType.DELET_COMAPNY:
+      const newData = state.companyData.filter((data) => data.id !== action.id);
+      return {
+        ...state,
+        companyData: [...newData],
+      };
     default:
       return {
         ...state,

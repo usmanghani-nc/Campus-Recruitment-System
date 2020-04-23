@@ -12,7 +12,7 @@ const AdminRoutes = () => {
   return (
     <React.Fragment>
       <Switch>
-        <Route exact path="/adminhome" component={AdminHome} />
+        <Route exact path="/AdminIndex/" component={AdminHome} />
         <Route path={`${url}/admincompany`} component={Company} />
         <Route path={`${url}/adminstudent`} component={Student} />
       </Switch>

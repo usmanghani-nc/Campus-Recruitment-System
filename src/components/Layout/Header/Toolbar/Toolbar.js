@@ -12,7 +12,10 @@ import { singout } from '../../../../store/action/index';
 import classes from '../header.module.scss';
 
 const Toolbar = () => {
+  let displayName;
   const user = useSelector((state) => state.authReducer.currnetuser);
+  const company = useSelector((state) => state.authReducer.company);
+  const student = useSelector((state) => state.authReducer.student);
   const admin = useSelector((state) => state.authReducer.admin);
 
   const dispatch = useDispatch();
@@ -22,6 +25,10 @@ const Toolbar = () => {
     history.push('/login');
     return dispatch(singout());
   };
+
+  if (company && company.data) displayName = company.data.companyName;
+
+  if (student && student.data) displayName = `${student.data.firstName}  ${student.data.lastName}`;
 
   return (
     <div className={classes.Toolbar}>
@@ -39,6 +46,9 @@ const Toolbar = () => {
             <div className={classes.toolbarRight}>
               <div className={classes.toolbarShareIcon}>
                 <ul>
+                  <li>
+                    <Link to="/">{displayName}</Link>
+                  </li>
                   {admin ? (
                     <li>
                       <Link to="/AdminIndex" className={classes.applyBtn}>

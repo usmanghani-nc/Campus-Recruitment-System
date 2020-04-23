@@ -1,52 +1,63 @@
 import React from 'react';
 
 // IMPORTS..
-import { Table, Tag } from 'antd';
+import { Table } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { delet_user, update_user } from '../../../../store/action/index';
 
 // SCSS..
+import classes from './adminHome.module.scss';
 
 const Company = () => {
-  const { Column, ColumnGroup } = Table;
-  const data = [
-    {
-      key: '1',
-      firstName: 'DADADADA',
-      lastName: 'DADA',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-    },
-    {
-      key: '2',
-      firstName: 'JiDDDm',
-      lastName: 'GDDreen',
-      age: 42,
-      address: 'LondoDDn No. 1 Lake Park',
-    },
-    {
-      key: '3',
-      firstName: 'Joe',
-      lastName: 'Black',
-      age: 32,
-      address: '4FSFS No. 1 Lake Park',
-    },
-  ];
+  const company = useSelector((state) => {
+    if (state && state.companyReducer && state.companyReducer.companyData) {
+      let dataSource = [];
+      let array = state.companyReducer.companyData ? state.companyReducer.companyData : [];
+
+      if (array.length) {
+        array.map((val, key) => {
+          const { companyEmail, companyLocation, companyName, companyType } = val.company.data;
+          let obj = {
+            key: val.id,
+            companyEmail,
+            companyLocation,
+            companyName,
+            companyType,
+          };
+
+          dataSource.push(obj);
+        });
+      }
+      return dataSource;
+    }
+  });
+
+  const dispatch = useDispatch();
+  const { Column } = Table;
 
   return (
-    <Table dataSource={data}>
-      <ColumnGroup title="Name">
-        <Column title="First Name" dataIndex="firstName" key="firstName" />
-        <Column title="Last Name" dataIndex="lastName" key="lastName" />
-      </ColumnGroup>
-      <Column title="Age" dataIndex="age" key="age" />
-      <Column title="Address" dataIndex="address" key="address" />
-
+    <Table className={classes.table} dataSource={company}>
+      <Column title="Company Email" dataIndex="companyEmail" key="companyEmail" />
+      <Column title="Company Location" dataIndex="companyLocation" key="companyLocation" />
+      <Column title="Company Name" dataIndex="companyName" key="companyName" />
+      <Column title="Company Type" dataIndex="companyType" key="companyType" />
       <Column
         title="Action"
         key="action"
         render={(text, record) => (
           <span>
-            <a style={{ marginRight: 16 }}>Invite {record.lastName}</a>
-            <a>Delete</a>
+            <div className="table-action-btn">
+              <FontAwesomeIcon
+                icon={faEdit}
+                onClick={() => dispatch(update_user(text.key, 'company'))}
+              />
+              <FontAwesomeIcon
+                icon={faTrash}
+                onClick={() => dispatch(delet_user(text.key, 'company'))}
+              />
+            </div>
           </span>
         )}
       />

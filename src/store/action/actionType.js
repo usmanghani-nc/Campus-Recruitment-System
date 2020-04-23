@@ -9,3 +9,6 @@ export const COMPANY_DATA = 'COMPANY_DATA';
 export const STUDENT_DATA = 'STUDENT_DATA';
 export const ADMIN_LOGIN = 'ADMIN_LOGIN';
 export const ADMIN_LOGOUT = 'ADMIN_LOGOUT';
+export const UPDATE_USER = 'UPDATE_USER';
+export const DELET_USER = 'DELET_USER';
+export const DELET_COMAPNY = 'DELET_COMAPNY';
