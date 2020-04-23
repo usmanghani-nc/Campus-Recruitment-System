@@ -12,3 +12,5 @@ export const ADMIN_LOGOUT = 'ADMIN_LOGOUT';
 export const UPDATE_USER = 'UPDATE_USER';
 export const DELET_USER = 'DELET_USER';
 export const DELET_COMAPNY = 'DELET_COMAPNY';
+export const COMPANY_UPDATE = 'COMPANY_UPDATE';
+export const COMPANY_UPDATED = 'COMPANY_UPDATED';

@@ -51,7 +51,7 @@ const Toolbar = () => {
                   </li>
                   {admin ? (
                     <li>
-                      <Link to="/AdminIndex" className={classes.applyBtn}>
+                      <Link to="/adminindex" className={classes.applyBtn}>
                         Admin
                       </Link>
                     </li>

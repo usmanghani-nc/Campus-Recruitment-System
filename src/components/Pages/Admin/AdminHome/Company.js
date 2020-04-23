@@ -6,6 +6,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { delet_user, update_user } from '../../../../store/action/index';
+import { Link, useRouteMatch, useHistory } from 'react-router-dom';
 
 // SCSS..
 import classes from './adminHome.module.scss';
@@ -33,10 +34,18 @@ const Company = () => {
       return dataSource;
     }
   });
-
   const dispatch = useDispatch();
   const { Column } = Table;
+  const history = useHistory();
 
+  const editProject = (projectId) => {
+    console.log(projectId);
+    if (projectId !== undefined && projectId !== null) {
+      history.push(`/adminIndex/admincompany/editcompany/${projectId}`);
+    }
+  };
+
+  // onClick={() => dispatch(update_user(text.key, 'company'))}
   return (
     <Table className={classes.table} dataSource={company}>
       <Column title="Company Email" dataIndex="companyEmail" key="companyEmail" />
@@ -49,10 +58,10 @@ const Company = () => {
         render={(text, record) => (
           <span>
             <div className="table-action-btn">
-              <FontAwesomeIcon
-                icon={faEdit}
-                onClick={() => dispatch(update_user(text.key, 'company'))}
-              />
+              <Link to={`/adminIndex/editcompany/${text.key}`}>
+                <FontAwesomeIcon icon={faEdit} />
+              </Link>
+
               <FontAwesomeIcon
                 icon={faTrash}
                 onClick={() => dispatch(delet_user(text.key, 'company'))}

@@ -2,6 +2,7 @@ import * as actionType from '../action/actionType';
 
 const initialState = {
   studentData: [],
+  singleData: false,
 };
 
 const studentReducer = (state = initialState, action) => {
@@ -16,6 +17,11 @@ const studentReducer = (state = initialState, action) => {
       return {
         ...state,
         studentData: [...newData],
+      };
+    case actionType.UPDATE_USER:
+      return {
+        ...state,
+        singleData: action.data,
       };
     default:
       return {

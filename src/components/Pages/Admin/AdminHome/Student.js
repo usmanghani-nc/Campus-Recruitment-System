@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 // IMPORTS..
-import { Table, Spin } from 'antd';
+import { Table } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { delet_user, update_user } from '../../../../store/action/index';
+import { delet_user } from '../../../../store/action/index';
+import { Link } from 'react-router-dom';
 
 // SCSS..
 import classes from './adminHome.module.scss';
@@ -69,10 +70,9 @@ const Student = () => {
           render={(text, record) => (
             <span>
               <div className="table-action-btn">
-                <FontAwesomeIcon
-                  icon={faEdit}
-                  onClick={() => dispatch(update_user(text.key, 'student'))}
-                />
+                <Link to={`/adminIndex/editstudent/${text.key}`}>
+                  <FontAwesomeIcon icon={faEdit} />
+                </Link>
                 <FontAwesomeIcon
                   icon={faTrash}
                   onClick={() => dispatch(delet_user(text.key, 'student'))}
