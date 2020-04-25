@@ -22,12 +22,17 @@ const companyReducer = (state = initialState, action) => {
     case actionType.COMPANY_UPDATE:
       return {
         ...state,
-        singleData: action.data,
+        singleData: action.updatedData,
       };
     case actionType.COMPANY_UPDATED:
+      const index = state.companyData.findIndex((data) => data.id === action.updatedData.id);
+      const arr = [...state.companyData];
+      arr[index] = action.updatedData;
+
       return {
         ...state,
-        singleData: action.data,
+        singleData: action.updatedData,
+        companyData: [...arr],
       };
     default:
       return {

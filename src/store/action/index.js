@@ -14,4 +14,4 @@ export { student_data } from './student';
 
 export { delet_user } from './deleteUser';
 
-export { update_user, company_updated } from './updateUser';
+export { update_user, company_updated, student_updated } from './updateUser';

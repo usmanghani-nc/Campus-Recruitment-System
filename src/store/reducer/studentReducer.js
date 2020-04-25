@@ -21,7 +21,17 @@ const studentReducer = (state = initialState, action) => {
     case actionType.UPDATE_USER:
       return {
         ...state,
-        singleData: action.data,
+        singleData: action.updatedData,
+      };
+    case actionType.STUDENT_UPDATED:
+      const index = state.studentData.findIndex((data) => data.id === action.updatedData.id);
+      const arr = [...state.studentData];
+      arr[index] = action.updatedData;
+
+      return {
+        ...state,
+        singleData: action.updatedData,
+        studentData: [...arr],
       };
     default:
       return {

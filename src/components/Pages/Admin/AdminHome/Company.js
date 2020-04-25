@@ -19,18 +19,20 @@ const Company = () => {
 
       if (array.length) {
         array.map((val, key) => {
-          const { companyEmail, companyLocation, companyName, companyType } = val.company.data;
-          let obj = {
-            key: val.id,
-            companyEmail,
-            companyLocation,
-            companyName,
-            companyType,
-          };
+          if (val && val.company && val.company.data) {
+            let obj = {
+              key: val.id,
+              companyEmail: val.company.data.companyEmail,
+              companyLocation: val.company.data.companyLocation,
+              companyName: val.company.data.companyName,
+              companyType: val.company.data.companyType,
+            };
 
-          dataSource.push(obj);
+            dataSource.push(obj);
+          }
         });
       }
+
       return dataSource;
     }
   });
@@ -47,7 +49,7 @@ const Company = () => {
 
   // onClick={() => dispatch(update_user(text.key, 'company'))}
   return (
-    <Table className={classes.table} dataSource={company}>
+    <Table className={classes.table} dataSource={company ? company : []}>
       <Column title="Company Email" dataIndex="companyEmail" key="companyEmail" />
       <Column title="Company Location" dataIndex="companyLocation" key="companyLocation" />
       <Column title="Company Name" dataIndex="companyName" key="companyName" />

@@ -10,7 +10,35 @@ export const company_updated = (data, id) => {
         .doc(id)
         .update({ data })
         .then(() => {
-          dispatch({ type: actionType.COMPANY_UPDATED, data });
+          let updatedData = {
+            id,
+            company: { data },
+          };
+
+          // console.log(updatedData);
+          dispatch({ type: actionType.COMPANY_UPDATED, updatedData });
+        })
+        .catch((err) => console.log(err));
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
+
+export const student_updated = (data, id) => {
+  return async (dispatch) => {
+    try {
+      const ref = await firestore.collection('students_users');
+
+      ref
+        .doc(id)
+        .update({ data })
+        .then(() => {
+          let updatedData = {
+            id,
+            student: { data },
+          };
+          dispatch({ type: actionType.STUDENT_UPDATED, updatedData });
         })
         .catch((err) => console.log(err));
     } catch (err) {
@@ -29,8 +57,11 @@ export const update_user = (user, collec) => {
           .get()
           .then((doc) => {
             if (doc.exists) {
-              let data = doc.data().data;
-              dispatch({ type: actionType.COMPANY_UPDATE, data });
+              let updatedData = {
+                id: user,
+                company: doc.data(),
+              };
+              dispatch({ type: actionType.COMPANY_UPDATE, updatedData });
             }
           })
           .catch((error) => console.error('Error updateing company: ', error));
@@ -43,9 +74,11 @@ export const update_user = (user, collec) => {
           .get()
           .then((doc) => {
             if (doc.exists) {
-              console.log(doc.data().data, user, collec);
-              let data = doc.data().data;
-              dispatch({ type: actionType.UPDATE_USER, data });
+              let updatedData = {
+                id: user,
+                student: doc.data(),
+              };
+              dispatch({ type: actionType.UPDATE_USER, updatedData });
             }
           })
           .catch((error) => console.error('Error updateing student: ', error));

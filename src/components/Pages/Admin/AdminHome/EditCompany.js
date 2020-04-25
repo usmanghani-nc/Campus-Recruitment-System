@@ -10,28 +10,52 @@ import { update_user, company_updated } from '../../../../store/action/index';
 import classes from './adminHome.module.scss';
 
 const EditCompany = (props) => {
-  const [companyName, setCompanyName] = useState('');
-  const [companyType, setCompanyType] = useState('');
-  const [companyLocation, setCompanyLocation] = useState('');
-  const [companyEmail, setCompanyEmail] = useState('');
+  const initialState = {
+    companyName: '',
+    companyType: '',
+    companyLocation: '',
+    companyEmail: '',
+    companyPassword: '',
+    isEdit: false,
+  };
+  const [state, setState] = useState(initialState);
 
   const dispatch = useDispatch();
   const history = useHistory();
   let { id } = useParams();
 
-  const company = useSelector((state) => state.companyReducer.singleData);
+  useSelector((statful) => {
+    if (statful && statful.companyReducer && statful.companyReducer.singleData && !state.isEdit) {
+      setState({
+        ...state,
+        isEdit: true,
+        companyEmail: statful.companyReducer.singleData.company.data.companyEmail,
+        companyLocation: statful.companyReducer.singleData.company.data.companyLocation,
+        companyName: statful.companyReducer.singleData.company.data.companyName,
+        companyPassword: statful.companyReducer.singleData.company.data.companyPassword,
+        companyType: statful.companyReducer.singleData.company.data.companyType,
+      });
+    }
+  });
 
   useEffect(() => {
     dispatch(update_user(id, 'company'));
   }, [id, dispatch]);
 
+  const handleInputChange = (event) => {
+    setState({
+      ...state,
+      [event.target.name]: event.target.value,
+    });
+  };
+
   const onFinish = () => {
     const companyData = {
-      companyName,
-      companyType,
-      companyLocation,
-      companyEmail,
-      companyPassword: company && company.companyPassword,
+      companyEmail: state.companyEmail,
+      companyLocation: state.companyLocation,
+      companyName: state.companyName,
+      companyPassword: state.companyPassword,
+      companyType: state.companyType,
     };
 
     dispatch(company_updated(companyData, id));
@@ -41,13 +65,11 @@ const EditCompany = (props) => {
 
   return (
     <React.Fragment>
-      <Form className={classes.registerForm} onFinish={onFinish}>
-        <label htmlFor="CompanyName">Company Name</label>
-
+      <Form className={classes.registerForm} onFinish={onFinish} initialValues={{ ...state }}>
+        <label htmlFor="companyName">Company Name</label>
         <Form.Item
           className={classes.formItem}
-          name="CompanyName"
-          placeholder={'Company Name'}
+          name="companyName"
           rules={[
             {
               required: true,
@@ -57,11 +79,11 @@ const EditCompany = (props) => {
         >
           <Input
             className={classes.inputs}
-            name="CompanyName"
-            placeholder={company && company.companyName ? company.companyName : 'Company Name'}
+            name="companyName"
+            placeholder="companyName"
             type="text"
-            onChange={(e) => setCompanyName(e.target.value)}
-            value={companyName}
+            onChange={handleInputChange}
+            value={state.companyName}
           />
         </Form.Item>
 
@@ -80,17 +102,17 @@ const EditCompany = (props) => {
           <Input
             className={classes.inputs}
             name="companyType"
-            placeholder={company && company.companyType ? company.companyType : 'Company type'}
+            placeholder={'Company type'}
             type="text"
-            onChange={(e) => setCompanyType(e.target.value)}
-            value={companyType}
+            onChange={handleInputChange}
+            value={state.companyType}
           />
         </Form.Item>
 
         <label htmlFor="companyType">Company location</label>
         <Form.Item
           className={classes.formItem}
-          name="CompanyLocation"
+          name="companyLocation"
           rules={[
             {
               required: true,
@@ -100,20 +122,18 @@ const EditCompany = (props) => {
         >
           <Input
             className={classes.inputs}
-            name="CompanyLocation"
-            placeholder={
-              company && company.companyLocation ? company.companyLocation : 'Company location'
-            }
+            name="companyLocation"
+            placeholder={'Company location'}
             type="text"
-            onChange={(e) => setCompanyLocation(e.target.value)}
-            value={companyLocation}
+            onChange={handleInputChange}
+            value={state.companyLocation}
           />
         </Form.Item>
 
         <label htmlFor="Email">Email</label>
         <Form.Item
           className={classes.formItem}
-          name="Email"
+          name="companyEmail"
           rules={[
             {
               required: true,
@@ -123,11 +143,11 @@ const EditCompany = (props) => {
         >
           <Input
             className={classes.inputs}
-            name="Email"
-            placeholder={company && company.companyEmail ? company.companyEmail : 'Email'}
+            name="companyEmail"
+            placeholder="Email"
             type="email"
-            onChange={(e) => setCompanyEmail(e.target.value)}
-            value={companyEmail}
+            onChange={handleInputChange}
+            value={state.companyEmail}
           />
         </Form.Item>
 

@@ -12,6 +12,7 @@ export const company_data = (company) => {
             id: doc.id,
             company: doc.data(),
           };
+
           dispatch({
             type: actionType.COMPANY_DATA,
             data,
