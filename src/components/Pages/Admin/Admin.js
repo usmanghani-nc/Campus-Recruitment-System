@@ -6,6 +6,8 @@ import { Form, Input, Button } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../../Layout/Loader/Loader';
 import { admin_login } from '../../../store/action/index';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 
 // SCSS...
 import classes from './admin.module.scss';
@@ -17,11 +19,14 @@ const Admin = () => {
 
   const dispatch = useDispatch();
   const admin = useSelector((state) => state.authReducer.admin);
+  const error = useSelector((state) => state.authReducer.error);
+  const errorMessage = useSelector((state) => state.authReducer.errorMessage);
 
   const onFinish = () => {
     dispatch(admin_login(email, password));
 
     admin ? setIsloading(false) : setIsloading(true);
+    !error ? setIsloading(false) : setIsloading(true);
   };
 
   return (
@@ -33,6 +38,16 @@ const Admin = () => {
               <h3>
                 Admin <span>Welcome back to CR system</span>
               </h3>
+              {errorMessage ? (
+                <div className="alert alert-warning input100 alert-dismissible show">
+                  <h4 className="alert-heading">
+                    <FontAwesomeIcon icon={faExclamationTriangle} /> Warning!
+                  </h4>
+                  <p>{errorMessage ? errorMessage : 'Login Failed'}</p>
+                </div>
+              ) : (
+                <div></div>
+              )}
               <Form className={classes.LoginForm} onFinish={onFinish}>
                 <label htmlFor="email">Email</label>
                 <Form.Item

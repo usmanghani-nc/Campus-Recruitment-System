@@ -55,10 +55,16 @@ export const admin_login = (email, password) => {
         dispatch({
           type: actionType.ADMIN_LOGIN,
           admin,
+          error: false,
         });
       }
     } catch (error) {
-      console.log(error, 'error');
+      dispatch({
+        type: actionType.ERROR,
+        error: true,
+        errorMessage:
+          'Really admin ? write down your credential on some paper you are a admin for god sake!!',
+      });
     }
   };
 };
@@ -77,10 +83,15 @@ export const login_company = (email, password, data) => {
         dispatch({
           type: actionType.LOGIN_COMPANY,
           comapny,
+          error: false,
         });
       }
     } catch (error) {
-      console.log(error, 'error');
+      dispatch({
+        type: actionType.ERROR,
+        error: true,
+        errorMessage: 'Please fill up the right credentials',
+      });
     }
   };
 };
@@ -99,6 +110,7 @@ export const register_company = (email, password, data) => {
           .then((doc) =>
             dispatch({
               type: actionType.REGISTER_COMPANY,
+              error: false,
             })
           )
           .catch((error) => {
@@ -125,10 +137,17 @@ export const login_student = (email, password) => {
         dispatch({
           type: actionType.LOGIN_STUDENT,
           student,
+          error: false,
+        }).catch((err) => {
+          console.log(err);
         });
       }
     } catch (error) {
-      console.log(error, 'error');
+      dispatch({
+        type: actionType.ERROR,
+        error: true,
+        errorMessage: 'Please fill up the right credentials',
+      });
     }
   };
 };

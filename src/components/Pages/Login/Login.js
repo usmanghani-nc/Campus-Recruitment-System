@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { Form, Select, Input, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { login_company, login_student } from '../../../store/action/index';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../../Layout/Loader/Loader';
 
@@ -23,6 +25,9 @@ const Login = () => {
 
   const user = useSelector((state) => state.authReducer.currnetuser);
 
+  const error = useSelector((state) => state.authReducer.error);
+  const errorMessage = useSelector((state) => state.authReducer.errorMessage);
+
   const handleDropDown = (e) => {
     setAccountType(e);
   };
@@ -30,12 +35,12 @@ const Login = () => {
   const onFinish = () => {
     if (accounType === 'student') {
       dispatch(login_student(studentEmail, studentPassword));
-
       user.uid ? setIsloading(false) : setIsloading(true);
+      !error ? setIsloading(false) : setIsloading(true);
     } else {
       dispatch(login_company(companyEmail, companyPassword));
-
       user.uid ? setIsloading(false) : setIsloading(true);
+      !error ? setIsloading(false) : setIsloading(true);
     }
   };
 
@@ -50,6 +55,7 @@ const Login = () => {
               <h3>
                 Welcome <span>To the best CR system</span>
               </h3>
+
               <Select
                 className={classes.dropDown}
                 placeholder="Login with"
@@ -60,6 +66,16 @@ const Login = () => {
                 <Option value="company">Login as company</Option>
               </Select>
             </div>
+            {errorMessage ? (
+              <div className="alert alert-warning input100 alert-dismissible show">
+                <h4 className="alert-heading">
+                  <FontAwesomeIcon icon={faExclamationTriangle} /> Warning!
+                </h4>
+                <p>{errorMessage ? errorMessage : 'Login Failed'}</p>
+              </div>
+            ) : (
+              <div></div>
+            )}
             {accounType === 'student' ? (
               <Form className={classes.LoginForm} onFinish={onFinish}>
                 <label htmlFor="email">Email</label>

@@ -6,6 +6,7 @@ const initialState = {
   student: false,
   company: false,
   error: false,
+  errorMessage: '',
 };
 
 const auth = (state = initialState, action) => {
@@ -19,41 +20,48 @@ const auth = (state = initialState, action) => {
         company: action.comapny,
       };
     case actionType.ADMIN_LOGIN:
-      console.log('ADMIN_LOGIN SUCCESS');
       return {
         ...state,
         admin: action.admin,
+        errorMessage: '',
       };
     case actionType.LOGIN_STUDENT:
-      console.log('LOGIN_STUDENT SUCCESS');
       return {
         ...state,
+        error: action.error,
         student: action.student,
+        errorMessage: '',
       };
     case actionType.LOGIN_COMPANY:
-      console.log('LOGIN_COMPANY SUCCESS');
       return {
         ...state,
+        error: action.error,
+        errorMessage: '',
         company: action.company,
       };
     case actionType.REGISTER_COMPANY:
-      console.log('REGISTER_COMPANY SUCCESS');
       return {
         ...state,
       };
     case actionType.REGISTER_STUDENT:
-      console.log('REGISTER_STUDENT SUCCESS');
       return {
         ...state,
       };
+    case actionType.ERROR:
+      return {
+        ...state,
+        error: action.error,
+        errorMessage: action.errorMessage,
+      };
     case actionType.SIGN_OUT:
-      console.log('SIGN_OUT SUCCESS');
       return {
         ...state,
         currnetuser: false,
         admin: false,
         student: false,
         company: false,
+        error: false,
+        errorMessage: '',
       };
     default:
       return {
