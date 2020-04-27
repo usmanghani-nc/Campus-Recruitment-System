@@ -2,7 +2,9 @@ import * as actionType from '../action/actionType';
 
 const initialState = {
   companyData: [],
+  vacancys: [],
   singleData: false,
+  successful: false,
 };
 
 const companyReducer = (state = initialState, action) => {
@@ -28,11 +30,20 @@ const companyReducer = (state = initialState, action) => {
       const index = state.companyData.findIndex((data) => data.id === action.updatedData.id);
       const arr = [...state.companyData];
       arr[index] = action.updatedData;
-
       return {
         ...state,
         singleData: action.updatedData,
         companyData: [...arr],
+      };
+    case actionType.VACANCY_POST:
+      return {
+        ...state,
+        successful: 'successful vacancy post',
+      };
+    case actionType.VACANCYS:
+      return {
+        ...state,
+        vacancys: [...state.vacancys, action.vacancys],
       };
     default:
       return {

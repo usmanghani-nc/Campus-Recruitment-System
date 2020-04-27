@@ -47,7 +47,7 @@ const Toolbar = () => {
               <div className={classes.toolbarShareIcon}>
                 <ul>
                   <li>
-                    <Link to="/">{displayName}</Link>
+                    <Link to="/ComapnyVacancy">{displayName}</Link>
                   </li>
                   {admin ? (
                     <li>

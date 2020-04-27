@@ -16,3 +16,5 @@ export const COMPANY_UPDATE = 'COMPANY_UPDATE';
 export const COMPANY_UPDATED = 'COMPANY_UPDATED';
 export const STUDENT_UPDATED = 'STUDENT_UPDATED,';
 export const ERROR = 'ERROR';
+export const VACANCY_POST = 'VACANCY_POST';
+export const VACANCYS = 'VACANCYS';

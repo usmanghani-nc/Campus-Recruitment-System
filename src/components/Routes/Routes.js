@@ -13,6 +13,7 @@ import Login from '../Pages/Login/Login';
 import Register from '../Pages/Register/Register';
 import Companys from '../Pages/Companys/Companys';
 import Students from '../Pages/Studens/Students';
+import ComapnyVacancy from '../Pages/Comapny_Vacancy/ComapnyVacancy';
 
 const Routes = () => {
   return (
@@ -26,6 +27,7 @@ const Routes = () => {
         <Route path="/register" component={Register} />
         <Route path="/companys" component={Companys} />
         <Route path="/students" component={Students} />
+        <Route path="/ComapnyVacancy" component={ComapnyVacancy} />
       </Switch>
       <Footer />
     </React.Fragment>

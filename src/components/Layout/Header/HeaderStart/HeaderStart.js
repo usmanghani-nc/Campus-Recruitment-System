@@ -11,6 +11,7 @@ import classes from '../header.module.scss';
 
 const HeaderStart = () => {
   const user = useSelector((state) => state.authReducer.currnetuser);
+  const company = useSelector((state) => state.authReducer.company);
 
   return (
     <React.Fragment>
@@ -26,7 +27,7 @@ const HeaderStart = () => {
               <Navbar.Toggle aria-controls="responsive-navbar-nav" />
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto">
-                  <Link to="/students">Students</Link>
+                  {company ? <Link to="/students">Students</Link> : null}
                   <Link to="companys">Companys</Link>
                 </Nav>
               </Navbar.Collapse>

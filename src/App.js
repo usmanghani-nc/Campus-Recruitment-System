@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Routes from './components/Routes/Routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { current_user, company_data, student_data } from './store/action/index';
+import { current_user, company_data, student_data, vacancys } from './store/action/index';
 import { auth } from './firebase/config';
 import Loader from './components/Layout/Loader/Loader';
 
@@ -19,6 +19,7 @@ const App = () => {
   const currentType = useSelector((state) => state.authReducer.userData);
 
   useEffect(() => {
+    dispatch(vacancys());
     dispatch(company_data());
     dispatch(student_data());
   }, [dispatch]);

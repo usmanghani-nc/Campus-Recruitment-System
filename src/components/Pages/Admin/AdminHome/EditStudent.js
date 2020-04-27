@@ -226,26 +226,7 @@ const EditStudent = (props) => {
           onChange={(e, str) => setBirthdate(str)}
           value={birthdate ? moment(birthdate, 'YYYY-MM-DD') : ''}
         />
-        <label htmlFor="password">Password</label>
-        <Form.Item
-          className={classes.formItem}
-          name="password"
-          rules={[
-            {
-              required: true,
-              message: 'Please input your password!',
-            },
-          ]}
-        >
-          <Input.Password
-            className={classes.inputs}
-            name="password"
-            type="password"
-            placeholder="Password"
-            onChange={handleInputChange}
-            value={state.password}
-          />
-        </Form.Item>
+
         <Button className={classes.subBtn} htmlType="submit">
           Submit
         </Button>

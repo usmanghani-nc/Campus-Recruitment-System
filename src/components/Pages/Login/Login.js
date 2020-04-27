@@ -24,7 +24,6 @@ const Login = () => {
   const { Option } = Select;
 
   const user = useSelector((state) => state.authReducer.currnetuser);
-
   const error = useSelector((state) => state.authReducer.error);
   const errorMessage = useSelector((state) => state.authReducer.errorMessage);
 

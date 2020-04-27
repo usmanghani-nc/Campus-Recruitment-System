@@ -1,0 +1,33 @@
+.Vacancys {
+  .welcom_text {
+    padding-left: 20px;
+    h3 {
+      font-weight: 700;
+      font-size: 35px;
+      span {
+        font-weight: 600;
+        font-size: 16px;
+        color: #ff3115;
+      }
+    }
+  }
+  a {
+    text-decoration: none;
+  }
+  p {
+    margin: 0;
+  }
+  .col {
+    margin: 10px 0;
+    .ant-card {
+      .ant-card-head {
+        background-color: #ff3115 !important;
+        color: #fff;
+      }
+
+      span {
+        color: rgba(99, 97, 97, 0.65);
+      }
+    }
+  }
+}
