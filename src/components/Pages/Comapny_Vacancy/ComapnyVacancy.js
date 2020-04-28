@@ -5,7 +5,7 @@ import { Form, Input, Button } from 'antd';
 import { Container, Row, Col } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
-import { vacancy_post } from '../../../store/action/index';
+import { vacancy_post, vacancys } from '../../../store/action/index';
 
 // SCSS..
 import classes from './ComapnyVacancy.module.scss';

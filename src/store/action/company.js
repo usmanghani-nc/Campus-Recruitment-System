@@ -33,9 +33,16 @@ export const vacancy_post = (vacancy) => {
         .add({
           vacancy,
         })
-        .then((doc) => dispatch({ type: actionType.VACANCY_POST }));
-    } catch {
-      dispatch({ type: actionType.ERROR });
+        .then((doc) => {
+          const data = {
+            id: doc.id,
+            vacancy: { vacancy },
+          };
+          dispatch({ type: actionType.VACANCY_POST, data });
+        });
+    } catch (err) {
+      console.log(err);
+      dispatch({ type: actionType.ERROR, err });
     }
   };
 };

@@ -36,14 +36,16 @@ const companyReducer = (state = initialState, action) => {
         companyData: [...arr],
       };
     case actionType.VACANCY_POST:
+      let newArr = [action.data, ...state.vacancys];
       return {
         ...state,
+        vacancys: [...newArr],
         successful: 'successful vacancy post',
       };
     case actionType.VACANCYS:
       return {
         ...state,
-        vacancys: [...state.vacancys, action.vacancys],
+        vacancys: [...state.vacancys, action.vacancys].reverse(),
       };
     default:
       return {

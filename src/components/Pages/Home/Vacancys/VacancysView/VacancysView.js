@@ -2,6 +2,8 @@ import React from 'react';
 
 // IMPORTS...
 import { Card } from 'antd';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPaperPlane, faPhoneAlt, faBuilding } from '@fortawesome/free-solid-svg-icons';
 
 const VacancysView = ({
   title,
@@ -18,9 +20,16 @@ const VacancysView = ({
 
       <span>{PostedDate}</span>
 
-      <div className="d-flex">
-        <h5 className="mr-2">{CompanyEmail}</h5>
-        <h5 className="mr-2">{Phone}</h5>
+      <div className="d-flex my-2">
+        <h5 className="mr-2">
+          <FontAwesomeIcon icon={faBuilding} /> {City}
+        </h5>
+        <h5 className="mr-2">
+          <FontAwesomeIcon icon={faPaperPlane} /> {CompanyEmail}
+        </h5>
+        <h5 className="mr-2">
+          <FontAwesomeIcon icon={faPhoneAlt} /> {Phone}
+        </h5>
       </div>
 
       <p>{Description}</p>
