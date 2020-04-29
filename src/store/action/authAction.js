@@ -34,10 +34,12 @@ export const current_user = (user) => {
           comapny,
         });
       } catch (error) {
-        console.log(error);
+        dispatch({
+          type: actionType.ERROR,
+          error: true,
+          errorMessage: 'No user',
+        });
       }
-    } else {
-      console.log('no user found');
     }
   };
 };
@@ -118,7 +120,11 @@ export const register_company = (email, password, data) => {
           });
       }
     } catch (error) {
-      console.log(error, 'error');
+      dispatch({
+        type: actionType.ERROR,
+        error: true,
+        errorMessage: 'Failed to register',
+      });
     }
   };
 };
@@ -173,7 +179,11 @@ export const register_student = (email, password, data) => {
           });
       }
     } catch (error) {
-      console.log(error, 'error');
+      dispatch({
+        type: actionType.ERROR,
+        error: true,
+        errorMessage: 'Failed to register',
+      });
     }
   };
 };

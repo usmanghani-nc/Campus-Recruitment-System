@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 import { Form, Input, Button, Select, DatePicker } from 'antd';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { register_company, register_student } from '../../../store/action/index';
 
@@ -36,11 +38,23 @@ const Register = () => {
 
   const dispatch = useDispatch();
   const user = useSelector((state) => state.authReducer.currnetuser);
+  const error = useSelector((state) => state.authReducer.error);
+  const errorMessage = useSelector((state) => state.authReducer.errorMessage);
 
   const { Option } = Select;
 
   const handleDropDown = (e) => {
     setAccountType(e);
+  };
+
+  const confirmPass = (rule, value, callback) => {
+    if (!value) {
+      callback('Password field is empty!');
+    } else if (value.length < 6) {
+      callback('Password lenth must be 6 or above');
+    } else {
+      callback();
+    }
   };
 
   const onFinish = () => {
@@ -69,11 +83,13 @@ const Register = () => {
 
       dispatch(register_student(email, password, student));
       user ? setIsloading(false) : setIsloading(true);
+      !error ? setIsloading(false) : setIsloading(true);
     } else {
       if (companyPassword !== companyConfirmPassword) alert('Password not match');
 
       dispatch(register_company(companyEmail, companyPassword, company));
       user ? setIsloading(false) : setIsloading(true);
+      !error ? setIsloading(false) : setIsloading(true);
     }
   };
 
@@ -98,7 +114,16 @@ const Register = () => {
               <Option value="student">Register as student</Option>
               <Option value="company">Register as company</Option>
             </Select>
-
+            {errorMessage ? (
+              <div className="alert alert-warning input100 alert-dismissible show">
+                <h4 className="alert-heading">
+                  <FontAwesomeIcon icon={faExclamationTriangle} /> Warning!
+                </h4>
+                <p>{errorMessage ? errorMessage : 'Login Failed'}</p>
+              </div>
+            ) : (
+              <div></div>
+            )}
             {accounType === 'student' ? (
               <Form className={classes.registerForm} onFinish={onFinish}>
                 <label htmlFor="firstName">First Name</label>
@@ -264,7 +289,7 @@ const Register = () => {
                   rules={[
                     {
                       required: true,
-                      message: 'Please input your password!',
+                      validator: (rule, value, callback) => confirmPass(rule, value, callback),
                     },
                   ]}
                 >
@@ -407,7 +432,7 @@ const Register = () => {
                   rules={[
                     {
                       required: true,
-                      message: 'Please input your Company Password!',
+                      validator: (rule, value, callback) => confirmPass(rule, value, callback),
                     },
                   ]}
                 >
@@ -430,7 +455,7 @@ const Register = () => {
                   rules={[
                     {
                       required: true,
-                      message: 'Please input your password',
+                      message: 'Please input your confirm password!',
                     },
                     ({ getFieldValue }) => ({
                       validator(rule, value) {
