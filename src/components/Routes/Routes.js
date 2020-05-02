@@ -2,6 +2,7 @@ import React from 'react';
 
 // IMPORTS...
 import { Switch, Route } from 'react-router-dom';
+import PrivateRoute from './PrivateRoute'
 
 // PAGES ..
 import Header from '../Layout/Header/Header';
@@ -16,18 +17,22 @@ import Students from '../Pages/Studens/Students';
 import ComapnyVacancy from '../Pages/Comapny_Vacancy/ComapnyVacancy';
 
 const Routes = () => {
+
+  
   return (
     <React.Fragment>
       <Header />
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/admin" component={Admin} />
-        <Route path="/adminindex" component={AdminIndex} />
         <Route path="/login" component={Login} />
         <Route path="/register" component={Register} />
-        <Route path="/companys" component={Companys} />
-        <Route path="/students" component={Students} />
-        <Route path="/ComapnyVacancy" component={ComapnyVacancy} />
+        <Route path="/admin" component={Admin} />
+
+        <PrivateRoute exact path="/" component={Home} />
+        <PrivateRoute path="/adminindex" component={AdminIndex} />
+        <PrivateRoute path="/companys" component={Companys} />
+        <PrivateRoute path="/students" component={Students} />
+        <PrivateRoute path="/ComapnyVacancy" component={ComapnyVacancy}/>
+
       </Switch>
       <Footer />
     </React.Fragment>

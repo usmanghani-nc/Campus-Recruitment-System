@@ -31,21 +31,29 @@ const Vacancys = () => {
   };
 
   const handleUpload = () => {
-    console.log(state.rasume, 'workd');
+    console.log(state.rasume);
 
     const uploadTask = firestorage.ref(`rasume/${state.rasume.name}`).put(state.rasume);
+
+    // uploadTask.on(firestorage.TastEvent.STATE_CHNAGED, () => {
+
+    // })
 
   };
 
   return (
     <div className="Vacancys">
+
+  
       <Container>
+           
         <Row>
           <div className="welcom_text">
             <h3>
               Vacancys <span>latest vacancy</span>
             </h3>
           </div>
+      
           {vacancys.map((v) => (
             <Col sm={6} md={12} key={v.id} className="col">
               <VacancysView

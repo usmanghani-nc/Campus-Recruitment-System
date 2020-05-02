@@ -12,6 +12,7 @@ import classes from '../header.module.scss';
 const HeaderStart = () => {
   const user = useSelector((state) => state.authReducer.currnetuser);
   const company = useSelector((state) => state.authReducer.company);
+  const student = useSelector((state) => state.authReducer.student);
 
   return (
     <React.Fragment>
@@ -28,7 +29,7 @@ const HeaderStart = () => {
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto">
                   {company ? <Link to="/students">Students</Link> : null}
-                  <Link to="companys">Companys</Link>
+                  {student ? <Link to="companys">Companys</Link> : null} 
                 </Nav>
               </Navbar.Collapse>
             </Navbar>

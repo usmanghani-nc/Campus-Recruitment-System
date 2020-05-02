@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 // IMPORTS..
 import { Form, Select, Input, Button } from 'antd';
 import { Link } from 'react-router-dom';
+
 import { login_company, login_student } from '../../../store/action/index';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faExclamationTriangle } from '@fortawesome/free-solid-svg-icons';
@@ -26,6 +27,7 @@ const Login = () => {
   const user = useSelector((state) => state.authReducer.currnetuser);
   const error = useSelector((state) => state.authReducer.error);
   const errorMessage = useSelector((state) => state.authReducer.errorMessage);
+ 
 
   const handleDropDown = (e) => {
     setAccountType(e);
@@ -36,10 +38,12 @@ const Login = () => {
       dispatch(login_student(studentEmail, studentPassword));
       user.uid ? setIsloading(false) : setIsloading(true);
       !error ? setIsloading(false) : setIsloading(true);
+   
     } else {
       dispatch(login_company(companyEmail, companyPassword));
       user.uid ? setIsloading(false) : setIsloading(true);
       !error ? setIsloading(false) : setIsloading(true);
+     
     }
   };
 
