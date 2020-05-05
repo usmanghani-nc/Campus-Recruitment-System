@@ -9,10 +9,11 @@ import { useSelector } from 'react-redux';
 const PrivateRoute = ({ component: Component, ...rest }) => {
 
     const currUser = useSelector(state => state && state.authReducer && state.authReducer.currnetuser)
- 
+    let fakauth = true;
+
     return (
         <Route {...rest} render={(props) => (
-            currUser ? <Component {...props} /> : <Redirect to="/login" />
+            fakauth ? <Component {...props} /> : <Redirect to="/login" />
         )} />
     )
 };

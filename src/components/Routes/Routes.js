@@ -3,6 +3,7 @@ import React from 'react';
 // IMPORTS...
 import { Switch, Route } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute'
+import { useSelector } from 'react-redux';
 
 // PAGES ..
 import Header from '../Layout/Header/Header';
@@ -18,7 +19,6 @@ import ComapnyVacancy from '../Pages/Comapny_Vacancy/ComapnyVacancy';
 
 const Routes = () => {
 
-  
   return (
     <React.Fragment>
       <Header />
@@ -31,7 +31,7 @@ const Routes = () => {
         <PrivateRoute path="/adminindex" component={AdminIndex} />
         <PrivateRoute path="/companys" component={Companys} />
         <PrivateRoute path="/students" component={Students} />
-        <PrivateRoute path="/ComapnyVacancy" component={ComapnyVacancy}/>
+        <PrivateRoute path="/ComapnyVacancy" component={ComapnyVacancy} />
 
       </Switch>
       <Footer />

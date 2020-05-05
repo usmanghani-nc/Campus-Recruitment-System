@@ -27,7 +27,7 @@ const Login = () => {
   const user = useSelector((state) => state.authReducer.currnetuser);
   const error = useSelector((state) => state.authReducer.error);
   const errorMessage = useSelector((state) => state.authReducer.errorMessage);
- 
+
 
   const handleDropDown = (e) => {
     setAccountType(e);
@@ -38,12 +38,12 @@ const Login = () => {
       dispatch(login_student(studentEmail, studentPassword));
       user.uid ? setIsloading(false) : setIsloading(true);
       !error ? setIsloading(false) : setIsloading(true);
-   
+
     } else {
       dispatch(login_company(companyEmail, companyPassword));
       user.uid ? setIsloading(false) : setIsloading(true);
       !error ? setIsloading(false) : setIsloading(true);
-     
+
     }
   };
 
@@ -52,128 +52,128 @@ const Login = () => {
       {isLoading ? (
         <Loader />
       ) : (
-        <div className={classes.Login}>
-          <div className={classes.loginBox}>
-            <div className={classes.welcomText}>
-              <h3>
-                Welcome <span>To the best CR system</span>
-              </h3>
+          <div className={classes.Login}>
+            <div className={classes.loginBox}>
+              <div className={classes.welcomText}>
+                <h3>
+                  Welcome <span>To the best CR system</span>
+                </h3>
 
-              <Select
-                className={classes.dropDown}
-                placeholder="Login with"
-                onChange={handleDropDown}
-                allowClear
-              >
-                <Option value="student">Login as student</Option>
-                <Option value="company">Login as company</Option>
-              </Select>
-            </div>
-            {errorMessage ? (
-              <div className="alert alert-warning input100 alert-dismissible show">
-                <h4 className="alert-heading">
-                  <FontAwesomeIcon icon={faExclamationTriangle} /> Warning!
-                </h4>
-                <p>{errorMessage ? errorMessage : 'Login Failed'}</p>
-              </div>
-            ) : (
-              <div></div>
-            )}
-            {accounType === 'student' ? (
-              <Form className={classes.LoginForm} onFinish={onFinish}>
-                <label htmlFor="email">Email</label>
-                <Form.Item
-                  className={classes.formItem}
-                  name="email"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please input your email!',
-                    },
-                  ]}
+                <Select
+                  className={classes.dropDown}
+                  placeholder="Login with"
+                  onChange={handleDropDown}
+                  allowClear
                 >
-                  <Input
+                  <Option value="student">Login as student</Option>
+                  <Option value="company">Login as company</Option>
+                </Select>
+              </div>
+              {errorMessage ? (
+                <div className="alert alert-warning input100 alert-dismissible show">
+                  <h4 className="alert-heading">
+                    <FontAwesomeIcon icon={faExclamationTriangle} /> Warning!
+                </h4>
+                  <p>{errorMessage ? errorMessage : 'Login Failed'}</p>
+                </div>
+              ) : (
+                  <div></div>
+                )}
+              {accounType === 'student' ? (
+                <Form className={classes.LoginForm} onFinish={onFinish}>
+                  <label htmlFor="email">Email</label>
+                  <Form.Item
                     className={classes.formItem}
                     name="email"
-                    placeholder="Email"
-                    type="email"
-                    onChange={(e) => setStudentEmail(e.target.value)}
-                    value={studentEmail}
-                  />
-                </Form.Item>
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Please input your email!',
+                      },
+                    ]}
+                  >
+                    <Input
+                      className={classes.formItem}
+                      name="email"
+                      placeholder="Email"
+                      type="email"
+                      onChange={(e) => setStudentEmail(e.target.value)}
+                      value={studentEmail}
+                    />
+                  </Form.Item>
 
-                <label htmlFor="password">Password</label>
-                <Form.Item
-                  className="form-item-antd"
-                  name="password"
-                  rules={[
-                    {
-                      required: true,
-                      message: 'Please input your password!',
-                    },
-                  ]}
-                >
-                  <Input.Password
-                    className={classes.inputs}
+                  <label htmlFor="password">Password</label>
+                  <Form.Item
+                    className="form-item-antd"
                     name="password"
-                    type="password"
-                    placeholder="Password"
-                    onChange={(e) => setStudentPassword(e.target.value)}
-                    value={studentPassword}
-                  />
-                </Form.Item>
+                    rules={[
+                      {
+                        required: true,
+                        message: 'Please input your password!',
+                      },
+                    ]}
+                  >
+                    <Input.Password
+                      className={classes.inputs}
+                      name="password"
+                      type="password"
+                      placeholder="Password"
+                      onChange={(e) => setStudentPassword(e.target.value)}
+                      value={studentPassword}
+                    />
+                  </Form.Item>
 
-                <Button className={classes.subBtn} htmlType="submit">
-                  Login with student
+                  <Button className={classes.subBtn} htmlType="submit">
+                    Login with student
                 </Button>
-              </Form>
-            ) : accounType === 'company' ? (
-              <Form className={classes.LoginForm} onFinish={onFinish}>
-                <label htmlFor="email">Email</label>
-                <Form.Item
-                  className={classes.formItem}
-                  name="email"
-                  rules={[{ required: true, message: 'Please input your Email!' }]}
-                >
-                  <Input
-                    className={classes.inputs}
+                </Form>
+              ) : accounType === 'company' ? (
+                <Form className={classes.LoginForm} onFinish={onFinish}>
+                  <label htmlFor="email">Email</label>
+                  <Form.Item
+                    className={classes.formItem}
                     name="email"
-                    placeholder="Email"
-                    type="email"
-                    onChange={(e) => setcCmpanyEmail(e.target.value)}
-                    value={companyEmail}
-                  />
-                </Form.Item>
+                    rules={[{ required: true, message: 'Please input your Email!' }]}
+                  >
+                    <Input
+                      className={classes.inputs}
+                      name="email"
+                      placeholder="Email"
+                      type="email"
+                      onChange={(e) => setcCmpanyEmail(e.target.value)}
+                      value={companyEmail}
+                    />
+                  </Form.Item>
 
-                <label htmlFor="password">Password</label>
-                <Form.Item
-                  className={classes.formItem}
-                  name="password"
-                  rules={[{ required: true, message: 'Please input your Password!' }]}
-                >
-                  <Input.Password
-                    className={classes.inputs}
+                  <label htmlFor="password">Password</label>
+                  <Form.Item
+                    className={classes.formItem}
                     name="password"
-                    type="password"
-                    placeholder="Password"
-                    onChange={(e) => setCompanyPassword(e.target.value)}
-                    value={companyPassword}
-                  />
-                </Form.Item>
-                <Button className={classes.subBtn} htmlType="submit">
-                  Login with company
+                    rules={[{ required: true, message: 'Please input your Password!' }]}
+                  >
+                    <Input.Password
+                      className={classes.inputs}
+                      name="password"
+                      type="password"
+                      placeholder="Password"
+                      onChange={(e) => setCompanyPassword(e.target.value)}
+                      value={companyPassword}
+                    />
+                  </Form.Item>
+                  <Button className={classes.subBtn} htmlType="submit">
+                    Login with company
                 </Button>
-              </Form>
-            ) : null}
+                </Form>
+              ) : null}
 
-            <div className={classes.bottomText}>
-              <p>
-                Not registered? <Link to="/register">Create an account</Link>
-              </p>
+              <div className={classes.bottomText}>
+                <p>
+                  Not registered? <Link to="/register">Create an account</Link>
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
     </React.Fragment>
   );
 };

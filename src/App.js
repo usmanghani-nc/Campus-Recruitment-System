@@ -1,4 +1,4 @@
-import React, {useState , useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 // IMPORTS...
 import Routes from './components/Routes/Routes';
@@ -15,7 +15,7 @@ const App = () => {
 
   const history = useHistory();
   const dispatch = useDispatch();
- 
+
   const currentType = useSelector((state) => state.authReducer.userData);
 
   useEffect(() => {
@@ -26,12 +26,12 @@ const App = () => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((curUser) => {
-      if (curUser) {
+      if (curUser && curUser.uid ) {
         dispatch(current_user(curUser));
-       
+
         if (currentType && currentType.data && currentType.data.type) {
           history.push('/AdminIndex');
-        } else  {
+        } else {
           history.push('/');
         }
       }

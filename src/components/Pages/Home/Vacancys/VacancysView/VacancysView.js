@@ -15,9 +15,11 @@ const VacancysView = ({
   Phone,
   handleChangeFile,
   handleUpload,
+  userId
 }) => {
   return (
     <Card title={title} bordered={true} hoverable>
+
       <h4>{CompanyName}</h4>
 
       <span>{PostedDate}</span>
@@ -38,7 +40,7 @@ const VacancysView = ({
 
       <div className="uplado-btn">
         <input type="file" onChange={handleChangeFile} />
-        <Button onClick={handleUpload}>Upload</Button>
+        <Button onClick={() => handleUpload(userId)}>Upload</Button>
       </div>
     </Card>
   );

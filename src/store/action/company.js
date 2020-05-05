@@ -1,5 +1,7 @@
 import * as actionType from './actionType';
-import { firestore } from '../../firebase/config';
+import {
+  firestore
+} from '../../firebase/config';
 
 export const company_data = (company) => {
   return async (dispatch) => {
@@ -36,13 +38,21 @@ export const vacancy_post = (vacancy) => {
         .then((doc) => {
           const data = {
             id: doc.id,
-            vacancy: { vacancy },
+            vacancy: {
+              vacancy
+            },
           };
-          dispatch({ type: actionType.VACANCY_POST, data });
+          dispatch({
+            type: actionType.VACANCY_POST,
+            data
+          });
         });
     } catch (err) {
       console.log(err);
-      dispatch({ type: actionType.ERROR, err });
+      dispatch({
+        type: actionType.ERROR,
+        err
+      });
     }
   };
 };
@@ -66,3 +76,11 @@ export const vacancys = () => {
       });
   };
 };
+
+export const vacancyNotification = (notification) => async (dispatch) => {
+  await firestore.collection('notification').add({
+    notification
+  }).then(doc => dispatch({
+    type: actionType.NOTIFICATION
+  }))
+}

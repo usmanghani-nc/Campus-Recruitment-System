@@ -12,7 +12,6 @@ import './vacancys.scss';
 const Vacancys = () => {
   const initailState = {
     rasume: '',
-    url: '',
   };
 
   const [state, setState] = useState(initailState);
@@ -20,6 +19,7 @@ const Vacancys = () => {
   const vacancys = useSelector(
     (state) => state && state.companyReducer && state.companyReducer.vacancys
   );
+
 
   const handleChangeFile = (e) => {
     if (e.target.files[0]) {
@@ -30,30 +30,45 @@ const Vacancys = () => {
     }
   };
 
-  const handleUpload = () => {
-    console.log(state.rasume);
 
-    const uploadTask = firestorage.ref(`rasume/${state.rasume.name}`).put(state.rasume);
+  const handleUpload = (userId) => {
 
-    // uploadTask.on(firestorage.TastEvent.STATE_CHNAGED, () => {
+    const name = `rasume/${new Date()}-${state.rasume.name}`
+    const metaDate = {
+      contenetType: state.rasume.type
+    }
 
-    // })
+    try {
+      const uploadTask = firestorage.ref().child(name).put(state.rasume, metaDate);
 
+      uploadTask.then(snapshot => snapshot.ref.getDownloadURL())
+        .then(url => {
+          const notification = {
+            url,
+            userId
+          }
+
+          console.log(notification)
+        })
+
+    } catch (error) {
+      console.log(error)
+    }
   };
 
   return (
     <div className="Vacancys">
 
-  
+
       <Container>
-           
+
         <Row>
           <div className="welcom_text">
             <h3>
               Vacancys <span>latest vacancy</span>
             </h3>
           </div>
-      
+
           {vacancys.map((v) => (
             <Col sm={6} md={12} key={v.id} className="col">
               <VacancysView
