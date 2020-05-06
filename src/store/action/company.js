@@ -78,7 +78,7 @@ export const vacancys = () => {
 };
 
 export const vacancyNotification = (notification) => async (dispatch) => {
-  await firestore.collection('notification').add({
+  await firestore.collection('notifications').add({
     notification
   }).then(doc => dispatch({
     type: actionType.NOTIFICATION

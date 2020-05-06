@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
 // IMPORTS ...
-import { useSelector } from 'react-redux';
-import VacancysView from './VacancysView/VacancysView';
+import { useDispatch, useSelector } from 'react-redux';
 import { Container, Row, Col } from 'react-bootstrap';
 import { firestorage } from '../../../../firebase/config';
+import { vacancyNotification } from '../../../../store/action/index'
+import VacancysView from './VacancysView/VacancysView';
 
 // SCSS...
 import './vacancys.scss';
@@ -15,6 +16,8 @@ const Vacancys = () => {
   };
 
   const [state, setState] = useState(initailState);
+
+  const dispatch = useDispatch();
 
   const vacancys = useSelector(
     (state) => state && state.companyReducer && state.companyReducer.vacancys
@@ -48,7 +51,8 @@ const Vacancys = () => {
             userId
           }
 
-          console.log(notification)
+          dispatch(vacancyNotification(notification))
+
         })
 
     } catch (error) {
