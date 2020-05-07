@@ -1,5 +1,8 @@
 import * as actionType from './actionType';
-import { auth, firestore } from '../../firebase/config';
+import {
+  auth,
+  firestore
+} from '../../firebase/config';
 
 export const current_user = (user) => {
   return async (dispatch) => {
@@ -23,9 +26,8 @@ export const current_user = (user) => {
       .get()
       .then((doc) => doc.data())
       .catch((err) => console.log(err));
-
-    if (admin !== undefined || student !== undefined || comapny !== undefined) {
-      try {
+    try {
+      if (admin !== undefined || student !== undefined || comapny !== undefined) {
         dispatch({
           type: actionType.CURRENT_USER,
           user,
@@ -33,14 +35,15 @@ export const current_user = (user) => {
           student,
           comapny,
         });
-      } catch (error) {
-        dispatch({
-          type: actionType.ERROR,
-          error: true,
-          errorMessage: 'No user',
-        });
-      }
+      };
+    } catch (error) {
+      dispatch({
+        type: actionType.ERROR,
+        error: true,
+        errorMessage: 'No user',
+      });
     }
+
   };
 };
 
@@ -64,8 +67,7 @@ export const admin_login = (email, password) => {
       dispatch({
         type: actionType.ERROR,
         error: true,
-        errorMessage:
-          'Really admin ? write down your credential on some paper you are a admin for god sake!!',
+        errorMessage: 'Really admin ? write down your credential on some paper you are a admin for god sake!!',
       });
     }
   };

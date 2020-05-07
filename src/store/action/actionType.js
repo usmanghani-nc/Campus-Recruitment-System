@@ -19,3 +19,4 @@ export const ERROR = 'ERROR';
 export const VACANCY_POST = 'VACANCY_POST';
 export const VACANCYS = 'VACANCYS';
 export const NOTIFICATION = 'NOTIFICATION';
+export const GET_NOTIFICATION = 'GET_NOTIFICATIONS';

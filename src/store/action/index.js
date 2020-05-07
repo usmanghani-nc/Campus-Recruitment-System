@@ -8,7 +8,7 @@ export {
   admin_login,
 } from './authAction';
 
-export { company_data, vacancy_post, vacancys, vacancyNotification } from './company';
+export { company_data, vacancy_post, vacancys, vacancyNotification, getNotifacations } from './company';
 
 export { student_data } from './student';
 

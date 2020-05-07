@@ -3,6 +3,7 @@ import * as actionType from '../action/actionType';
 const initialState = {
   companyData: [],
   vacancys: [],
+  notifications: [],
   singleData: false,
   successful: false,
 };
@@ -50,6 +51,11 @@ const companyReducer = (state = initialState, action) => {
     case actionType.NOTIFICATION:
       return {
         ...state,
+      };
+    case actionType.GET_NOTIFICATION:
+      return {
+        ...state,
+        notifications: [...state.notifications, action.notification]
       };
     default:
       return {

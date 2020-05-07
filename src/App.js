@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 // IMPORTS...
 import Routes from './components/Routes/Routes';
 import { useHistory } from 'react-router-dom';
-import { current_user, company_data, student_data, vacancys } from './store/action/index';
+import { current_user, company_data, student_data, vacancys, getNotifacations } from './store/action/index';
 import { auth } from './firebase/config';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from './components/Layout/Loader/Loader'
@@ -12,6 +12,10 @@ import Loader from './components/Layout/Loader/Loader'
 import './App.scss';
 
 const App = () => {
+  const initilaState = {
+    isLoading: false,
+  }
+  const [state, setState] = useState(initilaState);
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -26,8 +30,9 @@ const App = () => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((curUser) => {
-      if (curUser && curUser.uid ) {
+      if (curUser && curUser.uid) {
         dispatch(current_user(curUser));
+        dispatch(getNotifacations(curUser.uid))
 
         if (currentType && currentType.data && currentType.data.type) {
           history.push('/AdminIndex');

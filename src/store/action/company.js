@@ -84,3 +84,19 @@ export const vacancyNotification = (notification) => async (dispatch) => {
     type: actionType.NOTIFICATION
   }))
 }
+
+
+export const getNotifacations = (companyId) => async dispatch => {
+  await firestore.collection("notifications").where("notification.userId", "==", companyId)
+    .get().then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        dispatch({
+          type: actionType.GET_NOTIFICATION,
+          notification: doc.data().notification
+        })
+      });
+    })
+    .catch((error) => {
+      console.log("Error getting documents: ", error);
+    });
+}
