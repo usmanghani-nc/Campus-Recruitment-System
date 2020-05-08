@@ -1,0 +1,25 @@
+.ant-dropdown {
+  .ant-menu {
+    .ant-menu-item {
+      height: 100%;
+      border-top: 1px solid #e54530;
+      border-bottom: 1px solid #e54530;
+      padding: 12px 6px;
+      a {
+        margin: 0;
+        text-decoration: none;
+      }
+
+      p {
+        margin: 0;
+        line-height: 1;
+        color: black;
+        font-weight: 550;
+      }
+    }
+  }
+}
+
+.visited {
+  background: rgb(236, 235, 235);
+}

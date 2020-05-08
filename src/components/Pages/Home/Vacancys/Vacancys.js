@@ -13,6 +13,9 @@ import './vacancys.scss';
 const Vacancys = () => {
   const initailState = {
     rasume: '',
+    isLoading: false,
+    firstName: '',
+    lastName: ''
   };
 
   const [state, setState] = useState(initailState);
@@ -23,6 +26,17 @@ const Vacancys = () => {
     (state) => state && state.companyReducer && state.companyReducer.vacancys
   );
 
+  useSelector((stateFul) => {
+    if (stateFul && stateFul.authReducer && stateFul.authReducer.student && !state.isLoading) {
+      const { firstName, lastName } = stateFul.authReducer.student.data;
+      setState({
+        ...state,
+        isLoading: true,
+        firstName: firstName,
+        lastName: lastName
+      })
+    }
+  });
 
   const handleChangeFile = (e) => {
     if (e.target.files[0]) {
@@ -48,7 +62,10 @@ const Vacancys = () => {
         .then(url => {
           const notification = {
             url,
-            userId
+            userId,
+            firstName: state.firstName,
+            lastName: state.lastName,
+            visited: false
           }
 
           dispatch(vacancyNotification(notification))

@@ -86,17 +86,50 @@ export const vacancyNotification = (notification) => async (dispatch) => {
 }
 
 
+// export const getNotifacations = (companyId) => async dispatch => {
+//   await firestore.collection("notifications").where("notification.userId", "==", companyId)
+//     .get().then((querySnapshot) => {
+//       querySnapshot.forEach((doc) => {
+//         dispatch({
+//           type: actionType.GET_NOTIFICATION,
+//           notification: {
+//             notId: doc.id,
+//             data: doc.data().notification
+//           }
+//         })
+//       });
+//     })
+//     .catch((error) => {
+//       console.log("Error getting documents: ", error);
+//     });
+// }
+
 export const getNotifacations = (companyId) => async dispatch => {
   await firestore.collection("notifications").where("notification.userId", "==", companyId)
-    .get().then((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
-        dispatch({
-          type: actionType.GET_NOTIFICATION,
-          notification: doc.data().notification
-        })
-      });
+    .onSnapshot(snapshot => {
+      let changes = snapshot.docChanges();
+      changes.forEach(change => {
+        if (change.type === 'added') {
+          dispatch({
+            type: actionType.GET_NOTIFICATION,
+            notification: {
+              notId: change.doc.id,
+              data: change.doc.data().notification
+            }
+          })
+        }
+      })
+    })
+}
+
+export const updateVisited = (visitedId) => async dispatch => {
+  await firestore.collection('notifications')
+    .doc(visitedId)
+    .update({ visited: true })
+    .then(() => {
+      dispatch({ type: actionType.UPDATE_VISITED });
     })
     .catch((error) => {
       console.log("Error getting documents: ", error);
     });
-}
+} 
