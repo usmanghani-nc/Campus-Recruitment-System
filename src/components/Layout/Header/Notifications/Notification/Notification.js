@@ -22,7 +22,7 @@ const Notification = (props) => {
                             <h3>{item.data.firstName} {item.data.lastName}</h3>
                             <p>Send you request to apply in your company</p>
                         </div>
-                        <a href={item.data.url} target="_blank" onClick={() => visitedLink(item.notId)}>DownLoad Rasume</a>
+                        <a href={item.data.url} target="_blank" rel="noopener noreferrer" onClick={() => visitedLink(item.notId)}>DownLoad Rasume</a>
                     </Menu.Item>
                 )
             })

@@ -4,6 +4,7 @@ import React from 'react';
 import { Card, Button } from 'antd';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPaperPlane, faPhoneAlt, faBuilding } from '@fortawesome/free-solid-svg-icons';
+import { Spin } from 'antd';
 
 const VacancysView = ({
   title,
@@ -15,8 +16,11 @@ const VacancysView = ({
   Phone,
   handleChangeFile,
   handleUpload,
-  userId
+  userId,
+  id,
+  spin
 }) => {
+
   return (
     <Card title={title} bordered={true} hoverable>
 
@@ -40,7 +44,11 @@ const VacancysView = ({
 
       <div className="uplado-btn">
         <input type="file" onChange={handleChangeFile} />
-        <Button onClick={() => handleUpload(userId)}>Upload</Button>
+
+        <Button onClick={() => handleUpload(userId, id)}>
+          <Spin spinning={spin} >Upload</Spin>
+        </Button>
+
       </div>
     </Card>
   );

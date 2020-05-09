@@ -44,12 +44,13 @@ const Student = () => {
             passingOutYear,
             gender,
           };
-          dataSource.push(obj);
+          return dataSource.push(obj);
         });
       }
 
       return dataSource;
     }
+
   });
 
   return (

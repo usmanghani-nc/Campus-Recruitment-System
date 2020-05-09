@@ -2,20 +2,28 @@ import React from 'react';
 
 // IMPORTS..
 import { Route, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import Auth from '../../Auth'
 
 // import Loader from './components/Layout/Loader/Loader';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-
-    const currUser = useSelector(state => state && state.authReducer && state.authReducer.currnetuser)
-    let fakauth = true;
-
+    console.log(Auth.getAuth())
     return (
-        <Route {...rest} render={(props) => (
-            fakauth ? <Component {...props} /> : <Redirect to="/login" />
-        )} />
-    )
+        <Route
+            {...rest}
+            render={(props) =>
+                Auth.getAuth() ? (
+                    <Component {...props} />
+                ) : (
+                        <Redirect
+                            to={{
+                                pathname: '/login',
+                            }}
+                        />
+                    )
+            }
+        />
+    );
 };
 
 export default PrivateRoute;

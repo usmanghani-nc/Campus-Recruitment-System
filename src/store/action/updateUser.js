@@ -1,5 +1,5 @@
 import * as actionType from './actionType';
-import { auth, firestore } from '../../firebase/config';
+import { firestore } from '../../firebase/config';
 
 export const company_updated = (data, id) => {
   return async (dispatch) => {

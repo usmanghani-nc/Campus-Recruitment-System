@@ -29,10 +29,12 @@ const Notifications = () => {
 
     const notifi = state && state.notification ? state.notification : 'notification';
 
+    const newNotifi = state && state.notification ? state.notification.filter(element => !element.data.visited) : '';
+
     return (
         <React.Fragment>
             <Dropdown overlay={() => <Notification notification={notifi} />} placement="bottomCenter">
-                <Badge count={1} className={classes.bdge} dot>
+                <Badge className={classes.bdge} dot={newNotifi ? false : true}>
                     <FontAwesomeIcon icon={faBell} />
                 </Badge>
             </Dropdown>

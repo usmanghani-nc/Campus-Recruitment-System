@@ -1,4 +1,7 @@
 .ant-dropdown {
+  .ant-menu-item-selected {
+    background: rgb(236, 235, 235) !important !important;
+  }
   .ant-menu {
     .ant-menu-item {
       height: 100%;
@@ -15,6 +18,11 @@
         line-height: 1;
         color: black;
         font-weight: 550;
+      }
+
+      &:focus {
+        border: none;
+        background: rgb(236, 235, 235) !important;
       }
     }
   }

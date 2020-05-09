@@ -21,12 +21,14 @@ const Login = () => {
   const [companyPassword, setCompanyPassword] = useState('');
   const [isLoading, setIsloading] = useState(false);
 
+
   const dispatch = useDispatch();
   const { Option } = Select;
 
   const user = useSelector((state) => state.authReducer.currnetuser);
   const error = useSelector((state) => state.authReducer.error);
   const errorMessage = useSelector((state) => state.authReducer.errorMessage);
+
 
 
   const handleDropDown = (e) => {
@@ -43,7 +45,6 @@ const Login = () => {
       dispatch(login_company(companyEmail, companyPassword));
       user.uid ? setIsloading(false) : setIsloading(true);
       !error ? setIsloading(false) : setIsloading(true);
-
     }
   };
 

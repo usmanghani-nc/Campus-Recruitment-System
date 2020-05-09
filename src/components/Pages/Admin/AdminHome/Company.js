@@ -5,8 +5,8 @@ import { Table } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
-import { delet_user, update_user } from '../../../../store/action/index';
-import { Link, useRouteMatch, useHistory } from 'react-router-dom';
+import { delet_user } from '../../../../store/action/index';
+import { Link } from 'react-router-dom';
 
 // SCSS..
 import classes from './adminHome.module.scss';
@@ -27,9 +27,9 @@ const Company = () => {
               companyName: val.company.data.companyName,
               companyType: val.company.data.companyType,
             };
-
-            dataSource.push(obj);
+            dataSource.push(obj)
           }
+          return dataSource;
         });
       }
 
@@ -38,16 +38,6 @@ const Company = () => {
   });
   const dispatch = useDispatch();
   const { Column } = Table;
-  const history = useHistory();
-
-  const editProject = (projectId) => {
-    console.log(projectId);
-    if (projectId !== undefined && projectId !== null) {
-      history.push(`/adminIndex/admincompany/editcompany/${projectId}`);
-    }
-  };
-
-  // onClick={() => dispatch(update_user(text.key, 'company'))}
   return (
     <Table className={classes.table} dataSource={company ? company : []}>
       <Column title="Company Email" dataIndex="companyEmail" key="companyEmail" />

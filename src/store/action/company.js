@@ -78,13 +78,13 @@ export const vacancys = () => {
 };
 
 export const vacancyNotification = (notification) => async (dispatch) => {
+
   await firestore.collection('notifications').add({
-    notification
+    ...notification
   }).then(doc => dispatch({
     type: actionType.NOTIFICATION
   }))
 }
-
 
 // export const getNotifacations = (companyId) => async dispatch => {
 //   await firestore.collection("notifications").where("notification.userId", "==", companyId)
@@ -105,7 +105,7 @@ export const vacancyNotification = (notification) => async (dispatch) => {
 // }
 
 export const getNotifacations = (companyId) => async dispatch => {
-  await firestore.collection("notifications").where("notification.userId", "==", companyId)
+  await firestore.collection("notifications").where("userId", "==", companyId)
     .onSnapshot(snapshot => {
       let changes = snapshot.docChanges();
       changes.forEach(change => {
@@ -114,7 +114,7 @@ export const getNotifacations = (companyId) => async dispatch => {
             type: actionType.GET_NOTIFICATION,
             notification: {
               notId: change.doc.id,
-              data: change.doc.data().notification
+              data: change.doc.data()
             }
           })
         }
@@ -127,7 +127,7 @@ export const updateVisited = (visitedId) => async dispatch => {
     .doc(visitedId)
     .update({ visited: true })
     .then(() => {
-      dispatch({ type: actionType.UPDATE_VISITED });
+      dispatch({ type: actionType.UPDATE_VISITED, visitedId });
     })
     .catch((error) => {
       console.log("Error getting documents: ", error);

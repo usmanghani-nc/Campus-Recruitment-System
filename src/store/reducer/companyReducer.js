@@ -58,8 +58,12 @@ const companyReducer = (state = initialState, action) => {
         notifications: [...state.notifications, action.notification]
       };
     case actionType.UPDATE_VISITED:
+      const notifIndex = state.notifications.findIndex(item => item.notId === action.visitedId)
+      const newArray = [...state.notifications]
+      newArray[notifIndex].data.visited = true;
       return {
         ...state,
+        notifications: [...newArray]
       };
     default:
       return {

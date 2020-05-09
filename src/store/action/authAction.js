@@ -57,11 +57,14 @@ export const admin_login = (email, password) => {
           .doc(adminSignIn.user.uid)
           .get()
           .then((doc) => doc.data());
+
         dispatch({
           type: actionType.ADMIN_LOGIN,
           admin,
           error: false,
         });
+
+        localStorage.setItem('USER_TOKEN', admin);
       }
     } catch (error) {
       dispatch({
@@ -84,11 +87,14 @@ export const login_company = (email, password, data) => {
           .doc(currUser.user.uid)
           .get()
           .then((doc) => doc.data());
+
         dispatch({
           type: actionType.LOGIN_COMPANY,
           comapny,
           error: false,
         });
+
+        localStorage.setItem('USER_TOKEN', comapny);
       }
     } catch (error) {
       dispatch({
@@ -120,6 +126,8 @@ export const register_company = (email, password, data) => {
           .catch((error) => {
             console.error('Error writing document: ', error);
           });
+
+        localStorage.setItem('USER_TOKEN', data);
       }
     } catch (error) {
       dispatch({
@@ -146,9 +154,8 @@ export const login_student = (email, password) => {
           type: actionType.LOGIN_STUDENT,
           student,
           error: false,
-        }).catch((err) => {
-          console.log(err);
-        });
+        })
+        localStorage.setItem('USER_TOKEN', student);
       }
     } catch (error) {
       dispatch({
@@ -179,6 +186,7 @@ export const register_student = (email, password, data) => {
           .catch((error) => {
             console.error('Error writing document: ', error);
           });
+        localStorage.setItem('USER_TOKEN', data);
       }
     } catch (error) {
       dispatch({
@@ -197,5 +205,6 @@ export const singout = () => {
         type: actionType.SIGN_OUT,
       });
     });
+    localStorage.removeItem('USER_TOKEN');
   };
 };

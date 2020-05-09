@@ -6,6 +6,7 @@ import { Container, Row, Col } from 'react-bootstrap';
 import { firestorage } from '../../../../firebase/config';
 import { vacancyNotification } from '../../../../store/action/index'
 import VacancysView from './VacancysView/VacancysView';
+import { notification } from 'antd';
 
 // SCSS...
 import './vacancys.scss';
@@ -15,7 +16,8 @@ const Vacancys = () => {
     rasume: '',
     isLoading: false,
     firstName: '',
-    lastName: ''
+    lastName: '',
+    id: false,
   };
 
   const [state, setState] = useState(initailState);
@@ -38,6 +40,22 @@ const Vacancys = () => {
     }
   });
 
+  const openNotificationWithIcon = type => {
+    if (type === 'success') {
+      notification[type]({
+        message: 'Rasume send',
+        description:
+          'Your Rasume has bee uploaded',
+      });
+    } else if (type === 'error') {
+      notification[type]({
+        message: 'Faild',
+        description:
+          'Choose a file to uploade',
+      });
+    }
+  };
+
   const handleChangeFile = (e) => {
     if (e.target.files[0]) {
       setState({
@@ -47,8 +65,17 @@ const Vacancys = () => {
     }
   };
 
+  const handleUpload = (userId, id) => {
 
-  const handleUpload = (userId) => {
+    if (!state.rasume) {
+      openNotificationWithIcon('error');
+      return;
+    }
+
+    setState({
+      ...state,
+      id: id
+    })
 
     const name = `rasume/${new Date()}-${state.rasume.name}`
     const metaDate = {
@@ -70,6 +97,12 @@ const Vacancys = () => {
 
           dispatch(vacancyNotification(notification))
 
+          setState({
+            ...state,
+            rasume: null,
+          });
+
+          openNotificationWithIcon('success');
         })
 
     } catch (error) {
@@ -94,8 +127,10 @@ const Vacancys = () => {
             <Col sm={6} md={12} key={v.id} className="col">
               <VacancysView
                 {...v.vacancy.vacancy}
+                id={v.id}
                 handleChangeFile={handleChangeFile}
                 handleUpload={handleUpload}
+                spin={state.id === v.id ? true : false}
               />
             </Col>
           ))}
