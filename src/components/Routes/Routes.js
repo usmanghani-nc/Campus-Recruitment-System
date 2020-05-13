@@ -2,8 +2,7 @@ import React from 'react';
 
 // IMPORTS...
 import { Switch, Route } from 'react-router-dom';
-import PrivateRoute from './PrivateRoute'
-
+import PrivateRoute from './PrivateRoute';
 
 // PAGES ..
 import Header from '../Layout/Header/Header';
@@ -16,7 +15,6 @@ import Register from '../Pages/Register/Register';
 import Companys from '../Pages/Companys/Companys';
 import Students from '../Pages/Studens/Students';
 import ComapnyVacancy from '../Pages/Comapny_Vacancy/ComapnyVacancy';
-
 
 const Routes = () => {
   return (

@@ -37,8 +37,7 @@ const Register = () => {
   const [companyConfirmPassword, setCompanyConfirmPassword] = useState('');
 
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.authReducer.currnetuser);
-  const error = useSelector((state) => state.authReducer.error);
+
   const errorMessage = useSelector((state) => state.authReducer.errorMessage);
 
   const { Option } = Select;
@@ -79,23 +78,17 @@ const Register = () => {
     };
 
     if (accounType === 'student') {
-      if (password !== confirmPassword) alert('Password not match');
-
+      setIsloading(true);
       dispatch(register_student(email, password, student));
-      user ? setIsloading(false) : setIsloading(true);
-      !error ? setIsloading(false) : setIsloading(true);
     } else {
-      if (companyPassword !== companyConfirmPassword) alert('Password not match');
-
+      setIsloading(true);
       dispatch(register_company(companyEmail, companyPassword, company));
-      user ? setIsloading(false) : setIsloading(true);
-      !error ? setIsloading(false) : setIsloading(true);
     }
   };
 
   return (
     <React.Fragment>
-      {isLoading ? (
+      {isLoading && !errorMessage ? (
         <Loader />
       ) : (
         <div className={classes.Register}>
