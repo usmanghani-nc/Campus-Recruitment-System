@@ -14,7 +14,9 @@ import Login from '../Pages/Login/Login';
 import Register from '../Pages/Register/Register';
 import Companys from '../Pages/Companys/Companys';
 import Students from '../Pages/Studens/Students';
+import Colleges from '../Pages/Colleges/Colleges';
 import ComapnyVacancy from '../Pages/Comapny_Vacancy/ComapnyVacancy';
+import Profile from '../Pages/Profile/Profile';
 
 const Routes = () => {
   return (
@@ -28,8 +30,10 @@ const Routes = () => {
         <PrivateRoute exact path="/" component={Home} />
         <PrivateRoute path="/adminindex" component={AdminIndex} />
         <PrivateRoute path="/companys" component={Companys} />
-        <PrivateRoute path="/students" component={Students} />
+        <PrivateRoute path="/colleges" component={Colleges} />
         <PrivateRoute path="/ComapnyVacancy" component={ComapnyVacancy} />
+        <PrivateRoute path="/students/:id" component={Students} />
+        <PrivateRoute path="/Profile" component={Profile} />
       </Switch>
       <Footer />
     </React.Fragment>

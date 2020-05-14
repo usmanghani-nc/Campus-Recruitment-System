@@ -1,17 +1,19 @@
 import * as actionType from './actionType';
 import { firestore } from '../../firebase/config';
 
-export const student_data = (student) => {
+export const student_data = (collegeId) => {
   return async (dispatch) => {
     await firestore
       .collection('students_users')
+      .where('data.college', '==', collegeId)
       .get()
-      .then((com) => {
-        com.forEach((doc) => {
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
           const data = {
             id: doc.id,
             student: doc.data(),
           };
+
           dispatch({
             type: actionType.STUDENT_DATA,
             data,
@@ -21,5 +23,11 @@ export const student_data = (student) => {
       .catch((error) => {
         console.log('Error getting document:', error);
       });
+  };
+};
+
+export const data_reset = (payload) => {
+  return {
+    type: actionType.DATA_RESET,
   };
 };

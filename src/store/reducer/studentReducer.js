@@ -33,6 +33,11 @@ const studentReducer = (state = initialState, action) => {
         singleData: action.updatedData,
         studentData: [...arr],
       };
+    case actionType.DATA_RESET:
+      return {
+        ...state,
+        studentData: [],
+      };
     default:
       return {
         ...state,

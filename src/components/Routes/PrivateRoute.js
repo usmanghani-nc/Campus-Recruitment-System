@@ -7,7 +7,6 @@ import Auth from '../../Auth';
 // import Loader from './components/Layout/Loader/Loader';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  console.log(Auth.getAuth());
   return (
     <Route
       {...rest}

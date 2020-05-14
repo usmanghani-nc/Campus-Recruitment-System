@@ -14,12 +14,12 @@ export {
   vacancys,
   vacancyNotification,
   getNotifacations,
-  updateVisited
+  updateVisited,
 } from './company';
 
-export { colleges_data } from './collegeAction'
+export { colleges_data } from './collegeAction';
 
-export { student_data } from './student';
+export { student_data, data_reset } from './student';
 
 export { delet_user } from './deleteUser';
 

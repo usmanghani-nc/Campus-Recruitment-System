@@ -47,7 +47,11 @@ const Toolbar = () => {
               <div className={classes.toolbarShareIcon}>
                 <ul>
                   <li>
-                    <Link to="/ComapnyVacancy">{displayName}</Link>
+                    {company ? (
+                      <Link to="/ComapnyVacancy">{displayName}</Link>
+                    ) : (
+                      <Link to="/profile">{displayName}</Link>
+                    )}
                   </li>
                   {admin ? (
                     <li>
@@ -64,19 +68,19 @@ const Toolbar = () => {
                       </div>
                     </li>
                   ) : (
-                      <React.Fragment>
-                        <li>
-                          <Link to="/register" className={classes.applyBtn}>
-                            Register
+                    <React.Fragment>
+                      <li>
+                        <Link to="/register" className={classes.applyBtn}>
+                          Register
                         </Link>
-                        </li>
-                        <li>
-                          <Link to="/login" className={classes.applyBtn}>
-                            Login
+                      </li>
+                      <li>
+                        <Link to="/login" className={classes.applyBtn}>
+                          Login
                         </Link>
-                        </li>
-                      </React.Fragment>
-                    )}
+                      </li>
+                    </React.Fragment>
+                  )}
                 </ul>
               </div>
             </div>

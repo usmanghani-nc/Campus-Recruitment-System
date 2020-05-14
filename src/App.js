@@ -6,10 +6,10 @@ import { useHistory } from 'react-router-dom';
 import {
   current_user,
   company_data,
-  student_data,
+  // student_data,
   vacancys,
   getNotifacations,
-  colleges_data
+  colleges_data,
 } from './store/action/index';
 import { auth } from './firebase/config';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,7 +30,7 @@ const App = () => {
   useEffect(() => {
     dispatch(vacancys());
     dispatch(company_data());
-    dispatch(student_data());
+    // dispatch(student_data());
     dispatch(colleges_data());
   }, [dispatch]);
 

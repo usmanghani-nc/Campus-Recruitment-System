@@ -1,7 +1,5 @@
 import * as actionType from './actionType';
-import {
-  firestore
-} from '../../firebase/config';
+import { firestore } from '../../firebase/config';
 
 export const company_data = (company) => {
   return async (dispatch) => {
@@ -39,19 +37,19 @@ export const vacancy_post = (vacancy) => {
           const data = {
             id: doc.id,
             vacancy: {
-              vacancy
+              vacancy,
             },
           };
           dispatch({
             type: actionType.VACANCY_POST,
-            data
+            data,
           });
         });
     } catch (err) {
       console.log(err);
       dispatch({
         type: actionType.ERROR,
-        err
+        err,
       });
     }
   };
@@ -78,13 +76,17 @@ export const vacancys = () => {
 };
 
 export const vacancyNotification = (notification) => async (dispatch) => {
-
-  await firestore.collection('notifications').add({
-    ...notification
-  }).then(doc => dispatch({
-    type: actionType.NOTIFICATION
-  }))
-}
+  await firestore
+    .collection('notifications')
+    .add({
+      ...notification,
+    })
+    .then((doc) =>
+      dispatch({
+        type: actionType.NOTIFICATION,
+      })
+    );
+};
 
 // export const getNotifacations = (companyId) => async dispatch => {
 //   await firestore.collection("notifications").where("notification.userId", "==", companyId)
@@ -104,32 +106,35 @@ export const vacancyNotification = (notification) => async (dispatch) => {
 //     });
 // }
 
-export const getNotifacations = (companyId) => async dispatch => {
-  await firestore.collection("notifications").where("userId", "==", companyId)
-    .onSnapshot(snapshot => {
+export const getNotifacations = (companyId) => async (dispatch) => {
+  await firestore
+    .collection('notifications')
+    .where('userId', '==', companyId)
+    .onSnapshot((snapshot) => {
       let changes = snapshot.docChanges();
-      changes.forEach(change => {
+      changes.forEach((change) => {
         if (change.type === 'added') {
           dispatch({
             type: actionType.GET_NOTIFICATION,
             notification: {
               notId: change.doc.id,
-              data: change.doc.data()
-            }
-          })
+              data: change.doc.data(),
+            },
+          });
         }
-      })
-    })
-}
+      });
+    });
+};
 
-export const updateVisited = (visitedId) => async dispatch => {
-  await firestore.collection('notifications')
+export const updateVisited = (visitedId) => async (dispatch) => {
+  await firestore
+    .collection('notifications')
     .doc(visitedId)
     .update({ visited: true })
     .then(() => {
       dispatch({ type: actionType.UPDATE_VISITED, visitedId });
     })
     .catch((error) => {
-      console.log("Error getting documents: ", error);
+      console.log('Error getting documents: ', error);
     });
-} 
+};

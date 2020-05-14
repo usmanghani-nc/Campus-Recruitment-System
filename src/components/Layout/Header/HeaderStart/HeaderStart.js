@@ -2,7 +2,7 @@ import React from 'react';
 
 // IMPORTS..
 import logo from '../../../../assets/img/logo.png';
-import Notifications from '../Notifications/Notifications'
+import Notifications from '../Notifications/Notifications';
 import { Nav, Navbar, Container } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -30,7 +30,7 @@ const HeaderStart = () => {
               <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="ml-auto">
                   {company ? <Notifications /> : null}
-                  {company ? <Link to="/students">Students</Link> : null}
+                  {company ? <Link to="/colleges">Colleges</Link> : null}
                   {student ? <Link to="companys">Companys</Link> : null}
                 </Nav>
               </Navbar.Collapse>
