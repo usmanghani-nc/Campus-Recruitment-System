@@ -17,6 +17,8 @@ export {
   updateVisited
 } from './company';
 
+export { colleges_data } from './collegeAction'
+
 export { student_data } from './student';
 
 export { delet_user } from './deleteUser';

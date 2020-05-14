@@ -9,6 +9,7 @@ import {
   student_data,
   vacancys,
   getNotifacations,
+  colleges_data
 } from './store/action/index';
 import { auth } from './firebase/config';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,6 +31,7 @@ const App = () => {
     dispatch(vacancys());
     dispatch(company_data());
     dispatch(student_data());
+    dispatch(colleges_data());
   }, [dispatch]);
 
   useEffect(() => {
