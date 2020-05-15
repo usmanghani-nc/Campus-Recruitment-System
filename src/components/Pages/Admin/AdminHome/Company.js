@@ -27,7 +27,7 @@ const Company = () => {
               companyName: val.company.data.companyName,
               companyType: val.company.data.companyType,
             };
-            dataSource.push(obj)
+            dataSource.push(obj);
           }
           return dataSource;
         });

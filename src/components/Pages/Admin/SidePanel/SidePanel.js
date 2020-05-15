@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Layout, Menu } from 'antd';
 import { UserOutlined, PieChartOutlined } from '@ant-design/icons';
 import { Link, useRouteMatch } from 'react-router-dom';
+import Routes from '../AdminRoutes/AdminRoutes';
 import './sidebar.scss';
 
 const SidePanel = (props) => {
@@ -22,7 +23,7 @@ const SidePanel = (props) => {
           <Menu.Item key="1" className="sidebar-menu">
             <PieChartOutlined />
             <span>
-              <Link className="sideLinks" to={`${url}/adminhome`}>
+              <Link className="sideLinks" to="/adminindex">
                 Admin Home
               </Link>
             </span>
@@ -46,7 +47,10 @@ const SidePanel = (props) => {
         </Menu>
       </Sider>
       <Layout className="site-layout">
-        <Content style={{ margin: '0 16px' }}> {props.children}</Content>
+        <Content style={{ margin: '0 16px' }}>
+          {' '}
+          <Routes />
+        </Content>
       </Layout>
     </Layout>
   );

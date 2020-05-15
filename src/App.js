@@ -9,6 +9,7 @@ import {
   vacancys,
   getNotifacations,
   colleges_data,
+  studenst_data,
 } from './store/action/index';
 import { auth } from './firebase/config';
 import { useDispatch, useSelector } from 'react-redux';
@@ -30,6 +31,7 @@ const App = () => {
     dispatch(vacancys());
     dispatch(company_data());
     dispatch(colleges_data());
+    dispatch(studenst_data());
   }, [dispatch]);
 
   useEffect(() => {
@@ -44,6 +46,7 @@ const App = () => {
         dispatch(getNotifacations(curUser.uid));
       }
     });
+
     setState({
       ...state,
       isLoading: false,
@@ -51,7 +54,7 @@ const App = () => {
 
     // Cleanup subscription on unmount
     return () => unsubscribe();
-  }, [dispatch, currentType, history, setState]);
+  }, [dispatch, currentType, history]);
 
   return <div className="App">{state.isLoading ? <Loader /> : <Routes />}</div>;
 };

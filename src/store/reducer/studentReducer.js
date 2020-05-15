@@ -8,6 +8,11 @@ const initialState = {
 
 const studentReducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionType.STUDENTS_DATA:
+      return {
+        ...state,
+        studentData: [...state.studentData, action.data],
+      };
     case actionType.STUDENT_DATA:
       return {
         ...state,
@@ -28,10 +33,8 @@ const studentReducer = (state = initialState, action) => {
       const index = state.studentData.findIndex((data) => data.id === action.updatedData.id);
       const arr = [...state.studentData];
       arr[index] = action.updatedData;
-
       return {
         ...state,
-        singleData: action.updatedData,
         studentData: [...arr],
         singleData: action.updatedData,
       };

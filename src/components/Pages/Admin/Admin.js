@@ -23,8 +23,8 @@ const Admin = () => {
 
   useSelector((state) => {
     if (state && state.authReducer && state.authReducer.admin && isLoading) {
-      setIsloading(false);
       history.push('/adminindex');
+      setIsloading(false);
     }
   });
 

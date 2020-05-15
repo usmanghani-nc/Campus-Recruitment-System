@@ -14,7 +14,7 @@ const AdminRoutes = () => {
   return (
     <React.Fragment>
       <Switch>
-        <Route exact path="/adminIndex" component={AdminHome} />
+        {/* <Route path="/adminindex" component={AdminHome} /> */}
         <Route path={`${path}/admincompany`} component={Company} />
         <Route path={`${path}/adminstudent`} component={Student} />
         <Route path={`${path}/editcompany/:id`} component={EditCompany} />

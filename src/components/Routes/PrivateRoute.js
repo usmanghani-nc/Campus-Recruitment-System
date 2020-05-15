@@ -5,7 +5,6 @@ import { Route, Redirect } from 'react-router-dom';
 import Auth from '../../Auth';
 
 const PrivateRoute = ({ component: Component, ...rest }) => {
-  console.log(Auth.getAuth());
   return (
     <Route
       {...rest}
