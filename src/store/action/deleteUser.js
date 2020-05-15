@@ -6,12 +6,20 @@ export const delet_user = (user, collec) => {
     try {
       if (collec === 'company') {
         const ref = await firestore.collection('comapny_users');
+        const viRef = await firestore.collection('company_vacancy');
 
         ref
           .doc(user)
           .delete()
           .then((doc) => {
             dispatch({ type: actionType.DELET_COMAPNY, id: user });
+          });
+
+        viRef
+          .where('vacancy.userId', '==', user)
+          .delete()
+          .then((doc) => {
+            dispatch({ type: actionType.DELET_VACANCY, id: user });
           });
       }
 

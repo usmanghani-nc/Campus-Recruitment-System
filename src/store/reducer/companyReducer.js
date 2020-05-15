@@ -22,6 +22,12 @@ const companyReducer = (state = initialState, action) => {
         ...state,
         companyData: [...newData],
       };
+    case actionType.DELET_VACANCY:
+      // const newData = state.companyData.filter((data) => data.id !== action.id);
+      return {
+        ...state,
+        // companyData: [...newData],
+      };
     case actionType.COMPANY_UPDATE:
       return {
         ...state,
@@ -55,15 +61,15 @@ const companyReducer = (state = initialState, action) => {
     case actionType.GET_NOTIFICATION:
       return {
         ...state,
-        notifications: [...state.notifications, action.notification]
+        notifications: [...state.notifications, action.notification],
       };
     case actionType.UPDATE_VISITED:
-      const notifIndex = state.notifications.findIndex(item => item.notId === action.visitedId)
-      const newArray = [...state.notifications]
+      const notifIndex = state.notifications.findIndex((item) => item.notId === action.visitedId);
+      const newArray = [...state.notifications];
       newArray[notifIndex].data.visited = true;
       return {
         ...state,
-        notifications: [...newArray]
+        notifications: [...newArray],
       };
     default:
       return {
