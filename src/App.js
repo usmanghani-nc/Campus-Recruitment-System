@@ -6,7 +6,6 @@ import { useHistory } from 'react-router-dom';
 import {
   current_user,
   company_data,
-  // student_data,
   vacancys,
   getNotifacations,
   colleges_data,
@@ -30,7 +29,6 @@ const App = () => {
   useEffect(() => {
     dispatch(vacancys());
     dispatch(company_data());
-    // dispatch(student_data());
     dispatch(colleges_data());
   }, [dispatch]);
 
@@ -57,7 +55,7 @@ const App = () => {
 
     // Cleanup subscription on unmount
     return () => unsubscribe();
-  }, [dispatch, currentType, history]);
+  }, [dispatch, currentType, history, setState]);
 
   return <div className="App">{state.isLoading ? <Loader /> : <Routes />}</div>;
 };

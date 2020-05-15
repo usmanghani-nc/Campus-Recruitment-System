@@ -33,7 +33,7 @@ const Routes = () => {
         <PrivateRoute path="/colleges" component={Colleges} />
         <PrivateRoute path="/ComapnyVacancy" component={ComapnyVacancy} />
         <PrivateRoute path="/students/:id" component={Students} />
-        <PrivateRoute path="/Profile" component={Profile} />
+        <PrivateRoute path="/Profile/:id" component={Profile} />
       </Switch>
       <Footer />
     </React.Fragment>

@@ -91,152 +91,152 @@ const EditStudent = (props) => {
       {state.isLoading ? (
         <Skeleton active />
       ) : (
-        <Form className={classes.registerForm} onFinish={onFinish} initialValues={{ ...state }}>
-          <label htmlFor="firstName">First Name</label>
-          <Form.Item
-            className={classes.formItem}
-            name="firstName"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your First Name!',
-              },
-            ]}
-          >
-            <Input
-              className={classes.inputs}
+          <Form className={classes.registerForm} onFinish={onFinish} initialValues={{ ...state }}>
+            <label htmlFor="firstName">First Name</label>
+            <Form.Item
+              className={classes.formItem}
               name="firstName"
-              placeholder="First Name"
-              type="text"
-              onChange={handleInputChange}
-              value={state.firstName}
-            />
-          </Form.Item>
-          <label htmlFor="lastName">Last Name</label>
-          <Form.Item
-            className={classes.formItem}
-            name="lastName"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your Last Name!',
-              },
-            ]}
-          >
-            <Input
-              className={classes.inputs}
-              name="lastName"
-              placeholder="Last Name"
-              type="text"
-              onChange={handleInputChange}
-              value={state.lastName}
-            />
-          </Form.Item>
-          <label htmlFor="email">Email</label>
-          <Form.Item
-            className={classes.formItem}
-            name="email"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your email!',
-              },
-            ]}
-          >
-            <Input
-              className={classes.inputs}
-              name="email"
-              placeholder="Email"
-              type="email"
-              onChange={handleInputChange}
-              value={state.email}
-            />
-          </Form.Item>
-          <label htmlFor="education">Education</label>
-          <Form.Item
-            className={classes.formItem}
-            name="education"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your Education!',
-              },
-            ]}
-          >
-            <Input
-              className={classes.inputs}
-              name="education"
-              placeholder="Education"
-              type="text"
-              onChange={handleInputChange}
-              value={state.education}
-            />
-          </Form.Item>
-          <label htmlFor="marks">Passing out Total marks</label>
-          <Form.Item
-            className={classes.formItem}
-            name="totalMarks"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your Marks!',
-              },
-            ]}
-          >
-            <Input
-              className={classes.inputs}
-              name="totalMarks"
-              placeholder="Total marks"
-              type="text"
-              onChange={handleInputChange}
-              value={state.totalMarks}
-            />
-          </Form.Item>
-          <label htmlFor="PassingOutYear">Passing Out year</label>
-
-          <DatePicker
-            name="passingOutYear"
-            className={classes.datePicker}
-            onChange={(e, str) => setpassingOutYear(str)}
-            value={passingOutYear ? moment(passingOutYear, 'YYYY-MM-DD') : ''}
-          />
-
-          <label htmlFor="SelectGender">Select gender</label>
-          <Form.Item
-            className={classes.formItem}
-            name="gender"
-            rules={[
-              {
-                required: true,
-                message: 'Please input your Gender!',
-              },
-            ]}
-          >
-            <Select
-              className={classes.dropDown}
-              name="gender"
-              placeholder="gender"
-              onChange={handleSelectChange}
-              value={state.gender}
-              allowClear
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your First Name!',
+                },
+              ]}
             >
-              <Option value="male">Male</Option>
-              <Option value="female">Female</Option>
-            </Select>
-          </Form.Item>
-          <label htmlFor="Birthdate">Birthdate</label>
-          <DatePicker
-            name="birthdate"
-            className={classes.datePicker}
-            onChange={(e, str) => setBirthdate(str)}
-            value={birthdate ? moment(birthdate, 'YYYY-MM-DD') : ''}
-          />
+              <Input
+                className={classes.inputs}
+                name="firstName"
+                placeholder="First Name"
+                type="text"
+                onChange={handleInputChange}
+                value={state.firstName}
+              />
+            </Form.Item>
+            <label htmlFor="lastName">Last Name</label>
+            <Form.Item
+              className={classes.formItem}
+              name="lastName"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your Last Name!',
+                },
+              ]}
+            >
+              <Input
+                className={classes.inputs}
+                name="lastName"
+                placeholder="Last Name"
+                type="text"
+                onChange={handleInputChange}
+                value={state.lastName}
+              />
+            </Form.Item>
+            <label htmlFor="email">Email</label>
+            <Form.Item
+              className={classes.formItem}
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your email!',
+                },
+              ]}
+            >
+              <Input
+                className={classes.inputs}
+                name="email"
+                placeholder="Email"
+                type="email"
+                onChange={handleInputChange}
+                value={state.email}
+              />
+            </Form.Item>
+            <label htmlFor="education">Education</label>
+            <Form.Item
+              className={classes.formItem}
+              name="education"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your Education!',
+                },
+              ]}
+            >
+              <Input
+                className={classes.inputs}
+                name="education"
+                placeholder="Education"
+                type="text"
+                onChange={handleInputChange}
+                value={state.education}
+              />
+            </Form.Item>
+            <label htmlFor="marks">Passing out Total marks</label>
+            <Form.Item
+              className={classes.formItem}
+              name="totalMarks"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your Marks!',
+                },
+              ]}
+            >
+              <Input
+                className={classes.inputs}
+                name="totalMarks"
+                placeholder="Total marks"
+                type="text"
+                onChange={handleInputChange}
+                value={state.totalMarks}
+              />
+            </Form.Item>
+            <label htmlFor="PassingOutYear">Passing Out year</label>
 
-          <Button className={classes.subBtn} htmlType="submit">
-            Submit
+            <DatePicker
+              name="passingOutYear"
+              className={classes.datePicker}
+              onChange={(e, str) => setpassingOutYear(str)}
+              value={passingOutYear ? moment(passingOutYear, 'YYYY-MM-DD') : ''}
+            />
+
+            <label htmlFor="SelectGender">Select gender</label>
+            <Form.Item
+              className={classes.formItem}
+              name="gender"
+              rules={[
+                {
+                  required: true,
+                  message: 'Please input your Gender!',
+                },
+              ]}
+            >
+              <Select
+                className={classes.dropDown}
+                name="gender"
+                placeholder="gender"
+                onChange={handleSelectChange}
+                value={state.gender}
+                allowClear
+              >
+                <Option value="male">Male</Option>
+                <Option value="female">Female</Option>
+              </Select>
+            </Form.Item>
+            <label htmlFor="Birthdate">Birthdate</label>
+            <DatePicker
+              name="birthdate"
+              className={classes.datePicker}
+              onChange={(e, str) => setBirthdate(str)}
+              value={birthdate ? moment(birthdate, 'YYYY-MM-DD') : ''}
+            />
+
+            <Button className={classes.subBtn} htmlType="submit">
+              Submit
           </Button>
-        </Form>
-      )}
+          </Form>
+        )}
     </React.Fragment>
   );
 };

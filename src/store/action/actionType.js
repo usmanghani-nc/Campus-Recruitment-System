@@ -23,3 +23,4 @@ export const GET_NOTIFICATION = 'GET_NOTIFICATIONS';
 export const UPDATE_VISITED = 'UPDATE_VISITED';
 export const COLLEGES_DATA = 'COLLEGES_DATA';
 export const DATA_RESET = 'DATA_RESET';
+export const SINGLE_DATA = 'SINGLE_DATA'

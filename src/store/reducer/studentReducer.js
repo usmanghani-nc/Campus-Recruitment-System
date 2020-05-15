@@ -38,6 +38,11 @@ const studentReducer = (state = initialState, action) => {
         ...state,
         studentData: [],
       };
+    case actionType.SINGLE_DATA:
+      return {
+        ...state,
+        singleData: action.data,
+      };
     default:
       return {
         ...state,

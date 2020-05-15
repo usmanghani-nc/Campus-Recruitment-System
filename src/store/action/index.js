@@ -19,7 +19,7 @@ export {
 
 export { colleges_data } from './collegeAction';
 
-export { student_data, data_reset } from './student';
+export { student_data, data_reset, single_Data } from './student';
 
 export { delet_user } from './deleteUser';
 

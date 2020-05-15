@@ -8,7 +8,7 @@ export const student_data = (collegeId) => {
       .where('data.college', '==', collegeId)
       .get()
       .then((snapshot) => {
-        snapshot.forEach((doc) => {
+        snapshot.docs.forEach((doc) => {
           const data = {
             id: doc.id,
             student: doc.data(),
@@ -23,6 +23,25 @@ export const student_data = (collegeId) => {
       .catch((error) => {
         console.log('Error getting document:', error);
       });
+  };
+};
+
+export const single_Data = (studentId) => {
+  return async (dispatch) => {
+    await firestore
+      .collection('students_users')
+      .doc(studentId)
+      .get()
+      .then((doc) => {
+        const data = {
+          id: doc.id,
+          ...doc.data()
+        }
+
+        dispatch({ type: actionType.SINGLE_DATA, data });
+
+      })
+      .catch((err) => console.log(err));
   };
 };
 
