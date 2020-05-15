@@ -35,11 +35,23 @@ export const single_Data = (studentId) => {
       .then((doc) => {
         const data = {
           id: doc.id,
-          ...doc.data()
-        }
+          ...doc.data(),
+        };
 
         dispatch({ type: actionType.SINGLE_DATA, data });
+      })
+      .catch((err) => console.log(err));
+  };
+};
 
+export const college_data = (collegeId) => {
+  return async (dispatch) => {
+    await firestore
+      .collection('colleges')
+      .doc(collegeId)
+      .get()
+      .then((doc) => {
+        dispatch({ type: actionType.COLLEGE_NAME, collegeName: doc.data().collegeName });
       })
       .catch((err) => console.log(err));
   };

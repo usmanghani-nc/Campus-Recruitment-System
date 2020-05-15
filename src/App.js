@@ -43,10 +43,6 @@ const App = () => {
         dispatch(current_user(curUser));
         dispatch(getNotifacations(curUser.uid));
       }
-
-      if (currentType && currentType.data && currentType.data.type) {
-        history.push('/AdminIndex');
-      }
     });
     setState({
       ...state,

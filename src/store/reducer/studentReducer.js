@@ -3,6 +3,7 @@ import * as actionType from '../action/actionType';
 const initialState = {
   studentData: [],
   singleData: false,
+  collegeName: '',
 };
 
 const studentReducer = (state = initialState, action) => {
@@ -32,6 +33,7 @@ const studentReducer = (state = initialState, action) => {
         ...state,
         singleData: action.updatedData,
         studentData: [...arr],
+        singleData: action.updatedData,
       };
     case actionType.DATA_RESET:
       return {
@@ -42,6 +44,16 @@ const studentReducer = (state = initialState, action) => {
       return {
         ...state,
         singleData: action.data,
+      };
+    case actionType.SINGLE_STUDENT_UPDATED:
+      return {
+        ...state,
+        singleData: action.data,
+      };
+    case actionType.COLLEGE_NAME:
+      return {
+        ...state,
+        collegeName: action.collegeName,
       };
     default:
       return {

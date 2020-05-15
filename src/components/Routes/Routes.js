@@ -28,7 +28,7 @@ const Routes = () => {
         <Route path="/admin" component={Admin} />
 
         <PrivateRoute exact path="/" component={Home} />
-        <PrivateRoute path="/adminindex" component={AdminIndex} />
+        <PrivateRoute exact path="/adminindex" component={AdminIndex} />
         <PrivateRoute path="/companys" component={Companys} />
         <PrivateRoute path="/colleges" component={Colleges} />
         <PrivateRoute path="/ComapnyVacancy" component={ComapnyVacancy} />

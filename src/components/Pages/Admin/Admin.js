@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 // IMPORTS
-import {} from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { Form, Input, Button } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import Loader from '../../Layout/Loader/Loader';
@@ -17,21 +17,27 @@ const Admin = () => {
   const [password, setPassword] = useState('');
   const [isLoading, setIsloading] = useState(false);
 
+  const history = useHistory();
   const dispatch = useDispatch();
-  const admin = useSelector((state) => state.authReducer.admin);
-  const error = useSelector((state) => state.authReducer.error);
   const errorMessage = useSelector((state) => state.authReducer.errorMessage);
 
-  const onFinish = () => {
-    dispatch(admin_login(email, password));
+  useSelector((state) => {
+    if (state && state.authReducer && state.authReducer.admin && isLoading) {
+      setIsloading(false);
+      history.push('/adminindex');
+    }
+  });
 
-    admin ? setIsloading(false) : setIsloading(true);
-    !error ? setIsloading(false) : setIsloading(true);
+  const onFinish = () => {
+    setIsloading(true);
+    dispatch(admin_login(email, password));
   };
 
   return (
     <React.Fragment>
-      {!isLoading ? (
+      {isLoading && !errorMessage ? (
+        <Loader />
+      ) : (
         <div className={classes.Login}>
           <div className={classes.loginBox}>
             <div className={classes.welcomText}>
@@ -98,8 +104,6 @@ const Admin = () => {
             </div>
           </div>
         </div>
-      ) : (
-        <Loader />
       )}
     </React.Fragment>
   );
