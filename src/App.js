@@ -44,12 +44,16 @@ const App = () => {
       if (curUser && curUser.uid) {
         dispatch(current_user(curUser));
         dispatch(getNotifacations(curUser.uid));
+        setState({
+          ...state,
+          isLoading: false,
+        });
+      } else {
+        setState({
+          ...state,
+          isLoading: false,
+        });
       }
-    });
-
-    setState({
-      ...state,
-      isLoading: false,
     });
 
     // Cleanup subscription on unmount
