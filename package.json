@@ -29,9 +29,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "prePush" : "yarn build",
+    "prepush" : "yarn build",
     "push": "git add . && git commit -m",
-    "postPush" : "git push --all"
+    "postpush" : "git push --all"
   },
   "eslintConfig": {
     "extends": "react-app"
