@@ -37,7 +37,6 @@ const App = () => {
       dispatch(getNotifacations(curUser ? curUser.uid : curUser));
     });
 
-    // Cleanup subscription on unmount
     return () => unsubscribe();
   }, [currentType]);
 
