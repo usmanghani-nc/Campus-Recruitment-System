@@ -1,11 +1,19 @@
 import * as actionType from './actionType';
-import {
-  auth,
-  firestore
-} from '../../firebase/config';
+import { auth, firestore } from '../../firebase/config';
 
 export const current_user = (user) => {
   return async (dispatch) => {
+    if (!user) {
+      dispatch({
+        type: actionType.CURRENT_USER,
+        user: false,
+        admin: false,
+        student: false,
+        comapny: false,
+      });
+      return;
+    }
+
     const admin = await firestore
       .collection('Admin')
       .doc(user.uid)
@@ -26,6 +34,7 @@ export const current_user = (user) => {
       .get()
       .then((doc) => doc.data())
       .catch((err) => console.log(err));
+
     try {
       if (admin !== undefined || student !== undefined || comapny !== undefined) {
         dispatch({
@@ -35,7 +44,7 @@ export const current_user = (user) => {
           student,
           comapny,
         });
-      };
+      }
     } catch (error) {
       dispatch({
         type: actionType.ERROR,
@@ -43,7 +52,6 @@ export const current_user = (user) => {
         errorMessage: 'No user',
       });
     }
-
   };
 };
 
@@ -70,7 +78,8 @@ export const admin_login = (email, password) => {
       dispatch({
         type: actionType.ERROR,
         error: true,
-        errorMessage: 'Really admin ? write down your credential on some paper you are a admin for god sake!!',
+        errorMessage:
+          'Really admin ? write down your credential on some paper you are a admin for god sake!!',
       });
     }
   };
@@ -121,7 +130,7 @@ export const register_company = (email, password, data) => {
             dispatch({
               type: actionType.REGISTER_COMPANY,
               error: false,
-            })
+            }),
           )
           .catch((error) => {
             console.error('Error writing document: ', error);
@@ -154,7 +163,7 @@ export const login_student = (email, password) => {
           type: actionType.LOGIN_STUDENT,
           student,
           error: false,
-        })
+        });
         localStorage.setItem('USER_TOKEN', student);
       }
     } catch (error) {

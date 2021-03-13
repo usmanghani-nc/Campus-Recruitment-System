@@ -7,6 +7,7 @@ const initialState = {
   company: false,
   error: false,
   errorMessage: '',
+  loading: true,
 };
 
 const auth = (state = initialState, action) => {
@@ -18,6 +19,7 @@ const auth = (state = initialState, action) => {
         admin: action.admin,
         student: action.student,
         company: action.comapny,
+        loading: false,
       };
     case actionType.ADMIN_LOGIN:
       return {

@@ -14,18 +14,15 @@ import {
 import { auth } from './firebase/config';
 import { useDispatch, useSelector } from 'react-redux';
 import Loader from './components/Layout/Loader/Loader';
+import PublicRoutes from './components/Routes/PublicRoutes';
 
 // SCSS...
 import './App.scss';
 
 const App = () => {
-  const initialState = {
-    isLoading: false,
-  };
-  const [state, setState] = useState(initialState);
-  const history = useHistory();
   const dispatch = useDispatch();
-  const currentType = useSelector((state) => state.authReducer.userData);
+  const currentType = useSelector((state) => state.authReducer.currnetuser?.uid);
+  const loading = useSelector((state) => state.authReducer.loading);
 
   useEffect(() => {
     dispatch(vacancys());
@@ -35,32 +32,24 @@ const App = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    setState({
-      ...state,
-      isLoading: true,
-    });
-
     const unsubscribe = auth.onAuthStateChanged((curUser) => {
-      if (curUser && curUser.uid) {
-        dispatch(current_user(curUser));
-        dispatch(getNotifacations(curUser.uid));
-        setState({
-          ...state,
-          isLoading: false,
-        });
-      } else {
-        setState({
-          ...state,
-          isLoading: false,
-        });
-      }
+      dispatch(current_user(curUser));
+      dispatch(getNotifacations(curUser ? curUser.uid : curUser));
     });
 
     // Cleanup subscription on unmount
     return () => unsubscribe();
-  }, [dispatch, currentType, history]);
+  }, [currentType]);
 
-  return <div className="App">{state.isLoading ? <Loader /> : <Routes />}</div>;
+  if (loading) {
+    return (
+      <div className="App">
+        <Loader />
+      </div>
+    );
+  }
+
+  return <div className="App">{currentType ? <Routes /> : <PublicRoutes />}</div>;
 };
 
 export default App;
