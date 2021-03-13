@@ -3,14 +3,16 @@ import Login from '../Pages/Login/Login';
 import Register from '../Pages/Register/Register';
 import Header from '../Layout/Header/Header';
 import Page404 from '../Pages/404';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, useLocation } from 'react-router-dom';
 
-const PublicRoutes = () => {
+const PublicRoutes = ({}) => {
+  const { pathname } = useLocation();
+
   return (
     <>
       <Header />
       <Switch>
-        <Route path="/login" component={Login} />
+        <Route exact path={pathname === '/login' ? '/login' : '/'} component={Login} />
         <Route path="/register" component={Register} />
         <Route path="*" component={Page404} />
       </Switch>
